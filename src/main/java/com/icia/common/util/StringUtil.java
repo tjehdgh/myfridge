@@ -32,7 +32,7 @@ public final class StringUtil
 {
 	private StringUtil() {}
 
-	/**gggggggg
+	/**
 	 * <pre>
 	 * 메소드명   : nvl
 	 * 작성일     : 2020. 12. 29.
