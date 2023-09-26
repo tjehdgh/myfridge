@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <pre>
+ * <pre>zzzzz
  * 패키지명   : com.icia.common.util
  * 파일명     : StringUtil.java
  * 작성일     : 2020. 12. 29.
@@ -32,7 +32,7 @@ public final class StringUtil
 {
 	private StringUtil() {}
 
-	/**gggggggg
+	/**
 	 * <pre>
 	 * 메소드명   : nvl
 	 * 작성일     : 2020. 12. 29.
