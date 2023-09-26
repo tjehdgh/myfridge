@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <pre>zzzzz
+ * <pre>aaaaa
  * 패키지명   : com.icia.common.util
  * 파일명     : StringUtil.java
  * 작성일     : 2020. 12. 29.
