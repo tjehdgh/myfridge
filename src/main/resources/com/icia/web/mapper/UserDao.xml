@@ -83,13 +83,10 @@
 	        USER_ADDRESS = #{userAddress},
 	        USER_AGE = #{userAge},
 	        USER_GENDER = #{userGender},
-	        USER_PHONE_NUMBER = #{userPhoneNumber},
-	        USER_ACCOUNT = #{userAccount},
 	        USER_NAME = #{userName},
 	        USER_NICKNAME = #{userNickname}
 	    WHERE USER_ID = #{userId}
   </update>    
-
 
 
 

@@ -190,8 +190,6 @@ public class UserController
 			String userAddress = HttpUtil.get(request,"userAddress");
 			String userGender = HttpUtil.get(request,"userGender");
 			int userAge = HttpUtil.get(request,"userAge", 0);
-			String userPhoneNumber = HttpUtil.get(request,"userPhoneNumber");
-			String userAccount = HttpUtil.get(request,"userAccount");
 			String userNickname = HttpUtil.get(request,"userNickname");
 			
 			
@@ -202,8 +200,6 @@ public class UserController
 			logger.debug("userName: "+userName);
 			logger.debug("userAddress: "+userAddress);
 			logger.debug("userGender : " +userGender);
-			logger.debug("userPhoneNumber : " + userPhoneNumber);
-			logger.debug("userAccount : " + userAccount);
 			logger.debug("userNickname : " + userNickname);
 			logger.debug("userAge : " + userAge);
 			logger.debug("++++++++++++++++++++++=");
@@ -225,8 +221,6 @@ public class UserController
 					logger.debug("userName: "+userName);
 					logger.debug("userAddress: "+userAddress);
 					logger.debug("userGender : " +userGender);
-					logger.debug("userPhoneNumber : " + userPhoneNumber);
-					logger.debug("userAccount : " + userAccount);
 					logger.debug("userNickname : " + userNickname);
 					logger.debug("userAge : " + userAge);
 					logger.debug("++++++++++++++++++++++=");
@@ -239,8 +233,7 @@ public class UserController
 					//사용자 페이지에서 확인 했지만 다시한번더 확인
 					if(!StringUtil.isEmpty(userId) && !StringUtil.isEmpty(userPwd) && 
 							!StringUtil.isEmpty(userName) && !StringUtil.isEmpty(userAddress) && !StringUtil.isEmpty(userGender)
-							&& !StringUtil.isEmpty(userAge) && !StringUtil.isEmpty(userPhoneNumber) && !StringUtil.isEmpty(userAccount)
-							&& !StringUtil.isEmpty(userNickname))
+							&& !StringUtil.isEmpty(userAge) && !StringUtil.isEmpty(userNickname))
 					{
 						
 						String regDate = HttpUtil.get(request,"regDate");
@@ -252,8 +245,6 @@ public class UserController
 						user.setUserAddress(userAddress);
 						user.setUserGender(userGender);
 						user.setUserAge(userAge);
-						user.setUserPhoneNumber(userPhoneNumber);
-						user.setUserAccount(userAccount);
 						user.setUserNickname(userNickname);
 
 						
@@ -293,8 +284,6 @@ public class UserController
 				logger.debug("userName: "+userName);
 				logger.debug("userAddress: "+userAddress);
 				logger.debug("userGender : " +userGender);
-				logger.debug("userPhoneNumber : " + userPhoneNumber);
-				logger.debug("userAccount : " + userAccount);
 				logger.debug("userNickname : " + userNickname);
 				logger.debug("userAge : " + userAge);
 				logger.debug("++++++++++++++++++++++=");

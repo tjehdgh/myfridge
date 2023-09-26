@@ -16,7 +16,7 @@
 
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 
-
+<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" type="text/css">
 
@@ -50,7 +50,23 @@
     <!-- Template Stylesheet -->
     <link href="/resources/css/style.css" rel="stylesheet">
     
-    
+
+
+<!-- 프로필 버튼 커스텀 css -->
+<style>
+    .custom-file-upload {
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: #FF6600; /* 주황색 배경색 */
+        color: white; /* 흰색 글자색 */
+        border-radius: 4px;
+    }
+</style>
+
+
+
+
  <script>
  
  function fn_userFile()
@@ -109,7 +125,19 @@
 		});
  }
  
+ 
+ 
+ 
  $(document).ready(function() {
+	 
+	 //프로필 이미지
+	 $("#file").on('change',function(){
+		  var fileName = $("#file").val();
+		  $(".upload-name").val(fileName);
+		});
+	 
+	 
+	 
 	 
 	 $("#btnUpDate").on("click", function(){
 		
@@ -175,6 +203,7 @@
 	       if($("#userPwd1").val() != $("#userPwd2").val())
 	       {
 	          alert("비밀번호가 일치하지 않습니다.");
+	          $("#userPwd2").val("");
 	          $("#userPwd2").focus();
 	          return;
 	       }
@@ -191,67 +220,7 @@
 	       }
 	       
 	       
-	       
-	       
-	       //전화번호
-	       if($.trim($("#userPhoneNumber").val()).length <=0 )
-	       {
-	          alert("전화번호를 입력하세요.");
-	          $("#userPhoneNumber").val("");
-	          $("#userPhoneNumber").focus();
-	          return;
-	       }
-	       
-	       if(emptCheck.test($("#userPhoneNumber").val()))  
-	       {
-	          alert("전화번호는 공백을 포함할 수 없습니다.");
-	          $("#userPhoneNumber").focus();
-	          return;
-	       }
-	       
-	       if(!phoneRule.test($("#userPhoneNumber").val())) 
-	       {
-	          alert("전화번호는 0-9까지의 숫자로 000-000(0)-0000처럼 총10~11자리의 숫자만 입력 가능합니다.");
-	          $("#userPhoneNumber").focus();
-	          return;
-	       }
-	       
-	       
-	       if(($("#userPhoneNumber").val()).length > 11)
-	       {
-	       	alert("전화번호 형식은 숫자만 입력으로 11자리까지 입니다.");
-	       	$("#userPhoneNumber").focus();
-	           return;
-	       }
-	       
-	       
-	       
-	       
-	       	
-	       //계좌
-	       if($.trim($("#userAccount").val()).length <=0 )
-	       {
-	          alert("계좌번호를 입력하세요.");
-	          $("#userAccount").val("");
-	          $("#userAccount").focus();
-	          return;
-	       }
-	       
-	       if(emptCheck.test($("#userAccount").val()))  
-	       {
-	          alert("계좌번호는 공백을 포함할 수 없습니다.");
-	          $("#userAccount").focus();
-	          return;
-	       }
-	       
-	       
-	       if(!NumCheck.test($("#userAccount").val()))  
-	       {
-	          alert("계좌번호는 숫자만 입력가능합니다.");
-	          $("#userAccount").focus();
-	          return;
-	       }
-	       
+	      
 	       
 	       //사용자 이름
 	       if($.trim($("#userName").val()).length <= 0) //사용자 이름의 길이는 상관없음 한글자라도 입력만 하면 됨
@@ -338,8 +307,6 @@
 	              userAddress:$("#userAddress").val(),
 	              userAge:$("#userAge").val(),
 	              userGender:$("#userGender").val(),
-	              userPhoneNumber:$("#userPhoneNumber").val(),
-	              userAccount:$("#userAccount").val(),
 	              userName:$("#userName").val(),
 	              userNickname:$("#userNickname").val()
 	          },
@@ -401,20 +368,18 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
-    <div class="container-xxl position-relative p-0">
-            
+    <div class="container-xxl bg-white p-0">
+        <!-- Navbar & Hero Start -->
 
-             <div class="container-xxl py-1 bg-dark hero-header mb-5">
-                <div class="container text-center my-5 pt-1 pb-4">
-                    <h1 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h1></br></br>
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">마이페이지</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="/myPage/myPage">My Page</a></li>                          
-                            <li class="breadcrumb-item text-white active" aria-current="page">Sign Update</li>
+                            <li class=""><a href="/myPage/myPage">마이페이지</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">&nbsp;/ 회원정보 수정</li>   <!-- &nbsp; 는 공백입니다 -->
                         </ol>
                     </nav>
-                    
                 </div>
             </div>
         </div>
@@ -453,12 +418,11 @@
 			                        <a href="/myPage/myRecipe" class="list-group-item list-group-item-action">나만의 레시피 내역</a> 
 			                        <a href="/user/dropOut" class="list-group-item list-group-item-action">회원 탈퇴</a>
 			                        
-			                        
 			                        <div class="card-header bg-primary text-white">고객 센터</div>
 					                    <div class="list-group list-group-flush">
-					                        <a href="/board/qna" class="list-group-item list-group-item-action">QnA</a>
-					                        <a href="/board/notice" class="list-group-item list-group-item-action">공지사항</a>
-					                        <a href="/admin/event" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
+					                        <a href="/board/QnA" class="list-group-item list-group-item-action">QnA</a>
+					                        <a href="/board/Notice" class="list-group-item list-group-item-action">공지사항</a>
+					                        <a href="/board/Notice" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
 					                   </div>
 					                 
 			                     </div>
@@ -490,8 +454,20 @@
 				                            <form name="writeForm" id="writeForm" method="post" enctype="multipart/form-data">
 				                            
 				                        <!-- 프로필 사진 업로드 버튼 -->
-				                            <input type="file" id="userFile" name="userFile" placeholder="프로필 사진을 선택하세요." />
-                                            <button id="userfileSave" name="userfileSave" onclick="fn_userFile()">저장</button>
+				                
+                                            <label for="file">파일찾기</label>
+                                            <input type="file"  id="userFile" name="userFile" placeholder="프로필 사진을 선택하세요.">
+                                            <button class="btn-primary" id="userfileSave" name="userfileSave" onclick="fn_userFile()"  style="color: white; width: 60px; height: 40px;">저장</button>
+                                       
+                                        
+                                        
+                                     <!--      <div class="filebox">
+										    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+										    <label for="file">파일찾기</label> 
+										    <input type="file" id="file">
+										</div>
+                             			 -->             
+                                          
                                         <!-- 프로필 사진 업로드 버튼 -->
                                             
                                             
@@ -499,7 +475,7 @@
                                             <br>
                                             </form>
 				                            <h4 class="mb-0"> ${user.userNickname}</h4>
-				                            <h5>미키마우스@Disney.com</h5>
+				                            <h5>${user.email}</h5>
 				                            <br>
 				                            
 				                          <!-- <h4 class="mb-0"><c:if test="userCookieId == userId">${user.userNickname}</c:if> 미키마우스</h4>
@@ -584,30 +560,6 @@
 											  </div>
 						                 
 						                 
-						                 
-						                 
-						                 <div class="row g-2  d-flex justify-content-center" >
-                               				 <div class="col-8 text-center">    
-						                            <div class="form-group">
-						                            <br>
-						                                <h6 align="left">전화번호</h6>
-						                                <input type="text" class="form-control" id="userPhoneNumber" name="userPhoneNumber" value="${user.userPhoneNumber}" placeholder="전화번호 입력">
-						                            </div>
-												 </div>
-											  </div>
-											  
-											  
-						                    
-										<div class="row g-2  d-flex justify-content-center" >
-                               				 <div class="col-8 text-center">
-						                            <div class="form-group">
-						                            <br>
-						                                <h6 align="left">계좌번호</h6>
-						                                <input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌번호 입력">
-						                            </div>
-												 </div>
-											  </div>
-						
 						                    
 						                
 						                
@@ -659,19 +611,7 @@
 						                            </div>
 												 </div>
 											  </div>
-						
-						
-						
-						
-										<div class="row g-2  d-flex justify-content-center" >
-                               				 <div class="col-8 text-center">
-						                            <div class="form-group">
-						                            <br>
-						                                <h6 align="left">이메일 주소</h6>
-						                                <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="이메일 주소 입력">
-						                            </div>
-												 </div>
-											  </div>
+			
 						
 						
 														<input type="hidden" id="userPwd" name="userPwd" value="" /> <!-- 숨겨서 보내기 -->

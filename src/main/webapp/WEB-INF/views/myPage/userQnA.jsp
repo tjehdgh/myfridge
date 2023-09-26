@@ -16,7 +16,7 @@
 
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 
-
+<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" type="text/css">
 
@@ -102,20 +102,23 @@ function fn_list(curPage)
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
-    <div class="container-xxl position-relative p-0">
-            
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        
+        <!-- Spinner End -->
 
-             <div class="container-xxl py-1 bg-dark hero-header mb-5">
-                <div class="container text-center my-5 pt-1 pb-4">
-                    <h1 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h1></br></br>
+
+        <!-- Navbar & Hero Start -->
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">마이페이지</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="/myPage/myPage">My Page</a></li>                          
-                            <li class="breadcrumb-item text-white active" aria-current="page">My QnA</li>
+                            <li class="/index"><a href="/index">홈</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">&nbsp;/ 나의 문의 내역</li>   <!-- &nbsp; 는 공백입니다 -->
                         </ol>
                     </nav>
-                    
                 </div>
             </div>
         </div>
@@ -153,12 +156,11 @@ function fn_list(curPage)
 					                        <a href="/myPage/userQnA" class="list-group-item list-group-item-action">문의 내역</a>
 					                        <a href="/myPage/myRecipe" class="list-group-item list-group-item-action">나만의 레시피 내역</a> 
 					                        <a href="/user/dropOut" class="list-group-item list-group-item-action">회원 탈퇴</a>
-					                       
 					                        
 					                        <div class="card-header bg-primary text-white">고객 센터</div>
 							                    <div class="list-group list-group-flush">
-							                        <a href="/board/qna" class="list-group-item list-group-item-action">QnA</a>
-							                        <a href="/board/notice" class="list-group-item list-group-item-action">공지사항</a>
+							                        <a href="/admin/qna" class="list-group-item list-group-item-action">QnA</a>
+							                        <a href="/admin/notice" class="list-group-item list-group-item-action">공지사항</a>
 							                        <a href="/admin/event" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
 							                   </div>
 							                 
@@ -190,7 +192,7 @@ function fn_list(curPage)
                                      				<div>
 	                                     				<br>
 							                            <h4 class="mb-0">${user.userNickname}</h4>
-							                            <h5>미키마우스@Disney.com</h5>
+							                            <h5>${user.email}</h5>
 							                            <br>
 						                            </div>
 						                            
