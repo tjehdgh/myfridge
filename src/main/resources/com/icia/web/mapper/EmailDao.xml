@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.EmailDao">
+	
+	<resultMap type="com.icia.web.model.User" id="userResultMap">
+     <id column="USER_ID" property="userId" />
+     <result column="USER_PWD" property="userPwd" />
+     <result column="USER_ADDRESS" property="userAddress" />
+     <result column="STATUS" property="status" />
+     <result column="USER_EMAIL" property="email" />
+  	</resultMap>   
+  
+  
+	<select id="userPwdSelect" parameterType="com.icia.web.model.Email" resultMap="userResultMap">
+		SELECT
+    		USER_ID AS USER_ID,
+    		USER_PWD AS USER_PWD,
+    		STATUS AS STATUS,
+    		USER_EMAIL AS USER_EMAIL
+		FROM
+    		USER_INFO
+		WHERE
+    		USER_ID = #{userId}
+		AND USER_EMAIL = #{userEmail}
+	</select>
+
+<select id ="userPwdCount" parameterType ="com.icia.web.model.Email" resultType="int">
+	SELECT COUNT(USER_EMAIL)
+	  FROM USER_INFO
+	 WHERE 
+		USER_ID = #{userId}
+		AND USER_EMAIL = #{userEmail}
+</select>
+
+
+<select id ="userIdSelect" parameterType="String" resultMap="userResultMap">
+		SELECT
+    		USER_ID AS USER_ID,
+    		USER_PWD AS USER_PWD,
+    		STATUS AS STATUS,
+    		USER_EMAIL AS USER_EMAIL
+		FROM
+    		USER_INFO
+		WHERE
+			USER_EMAIL = #{value}
+</select>
+
+<select id="userIdCount" parameterType="String" resultType="int">
+SELECT	COUNT(USER_EMAIL)	
+		FROM
+    		USER_INFO
+		WHERE
+			USER_EMAIL = #{value}
+</select>
+
+
+</mapper>

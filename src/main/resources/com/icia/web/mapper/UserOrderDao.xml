@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.UserOrderDao">
+
+
+<resultMap type="com.icia.web.model.UserOrder" id="UserOrderResultMap">
+  	<id column="ORDER_CODE" property="orderCode" />
+  	<result column="ORDER_PRODUCT_NAME" property="orderProductName" />
+  	<result column="ODER_DATE" property="oderDate" />
+  	<result column="ORDER_STATE" property="orderState" />
+  	<result column="ORDER_PRODUCT_PRICE" property="orderProductPrice" />
+  	<result column="RECIPE_CODE" property="recipeCode" />
+  	<result column="PAY_STATE" property="payState" />
+  	<result column="PRODUCT_CODE" property="productCode" />
+  	<result column="USER_ID" property="userId" />
+  </resultMap>
+
+
+
+
+  
+  
+  
+  <!-- 마이페이지 홈에 보여줄 최근 주문내역 -->
+<select id="myRecentOrderlist" parameterType="String" resultMap="UserOrderResultMap">
+SELECT ORDER_CODE, ORDER_PRODUCT_NAME, ODER_DATE, ORDER_STATE, ORDER_PRODUCT_PRICE, PAY_STATE,
+                        PRODUCT_CODE, USER_ID
+    FROM (SELECT ROWNUM AS RN, ORDER_CODE, ORDER_PRODUCT_NAME, ODER_DATE, ORDER_STATE, ORDER_PRODUCT_PRICE, PAY_STATE,
+                        PRODUCT_CODE, USER_ID
+            FROM (SELECT ORDER_CODE, ORDER_PRODUCT_NAME,  NVL(TO_CHAR(ODER_DATE, 'YYYY-MM-DD'), '') AS ODER_DATE, ORDER_STATE, ORDER_PRODUCT_PRICE, PAY_STATE,
+                        PRODUCT_CODE, USER_ID
+                    FROM USER_ORDER
+                    WHERE USER_ID = #{value}
+                    ORDER BY ODER_DATE DESC))
+    WHERE RN BETWEEN 1 AND 3
+</select>
+
+
+
+<!-- 나의 주문내역 총개수 -->
+<select id="myOrderListTotalCount" parameterType="String" resultType="int">
+SELECT COUNT(ORDER_CODE) AS TOTAL_COUNT
+    FROM USER_ORDER
+    WHERE USER_ID = #{value}
+</select>
+
+
+<!-- 마이페이지 나의 주문 내역페이지에 나올 주문 리스트 -->
+<select id="myOrderList" parameterType="com.icia.web.model.UserOrder" resultMap="UserOrderResultMap">
+SELECT ORDER_CODE,
+        ORDER_PRODUCT_NAME,
+        ODER_DATE,
+        ORDER_STATE,
+        ORDER_PRODUCT_PRICE,
+        PAY_STATE,
+        PRODUCT_CODE,
+        USER_ID
+        FROM(SELECT ROWNUM AS RN,
+                    ORDER_CODE,
+                    ORDER_PRODUCT_NAME,
+                    ODER_DATE,
+                    ORDER_STATE,
+                    ORDER_PRODUCT_PRICE,
+                    PAY_STATE,
+                    PRODUCT_CODE,
+                    USER_ID
+                    FROM(SELECT ORDER_CODE,
+                                NVL(ORDER_PRODUCT_NAME, '') AS ORDER_PRODUCT_NAME,
+                                NVL(TO_CHAR(ODER_DATE, 'YYYY.MM.DD'), '') AS ODER_DATE,
+                                NVL(ORDER_STATE, '') AS ORDER_STATE,
+                                NVL(ORDER_PRODUCT_PRICE, '') AS ORDER_PRODUCT_PRICE,
+                                NVL(PAY_STATE, '') AS PAY_STATE,
+                                NVL(PRODUCT_CODE, '') AS PRODUCT_CODE,
+                                USER_ID
+                           FROM USER_ORDER
+                           WHERE USER_ID = #{userId}
+                      <if test='orderProductName != null and orderProductName != ""'>     
+                           AND ORDER_PRODUCT_NAME LIKE '%' || #{searchValue} || '%'
+                      </if>    
+                      
+                     <if test='orederByDate != null and orederByDate != "" and orederByDate == "DESC"'>    
+                   		   ORDER BY ODER_DATE DESC
+             		</if>
+             
+             		<if test='orederByDate != null and orederByDate != "" and orederByDate == "ASC"'>    
+                   		   ORDER BY ODER_DATE ASC
+             		</if>
+                      ))
+             WHERE RN <![CDATA[>=]]> #{startRow}	
+   		  	 AND RN <![CDATA[<=]]> #{endRow}
+</select>
+
+
+
+
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.BoardDao">
+
+<!-- QNA게시물 resultMap -->
+<resultMap id="qnaBoardResultMap" type="com.icia.web.model.QnaBoard">
+<id column="QNA_SEQ" property="qnaSeq" />
+	   <result column="QNA_TITLE" property="qnaTitle"/>	
+	   <result column="USER_ID" property="userId"/>
+	   <result column="REG_DATE" property="regDate"/>
+	   <result column="QNA_GROUP" property="qnaGroup"/>
+       <result column="QNA_ORDER" property="qnaOrder"/>
+       <result column="QNA_INDENT" property="qnaIndent"/>
+       <result column="QNA_PARENT" property="qnaParent"/>
+       <result column="QNA_CONTENT" property="qnaContent"/>
+       <result column="USER_NAME" property="userName"/>
+       <result column="ANS_STATUS" property="ansStatus"/>
+</resultMap>
+
+<!-- qna게시물 답변 resultMap -->
+<resultMap id="qnaBoardAnsResultMap" type="com.icia.web.model.QnaBoardAns">
+<id column="QNA_SEQ" property="qnaSeq" />
+		<result column="ANS_TITLE" property="ansTitle"/>	
+	   	<result column="ANS_CONTENT" property="ansContent"/>
+	   	<result column="ADMIN_ID" property="adminId"/>
+	   	<result column="REG_DATE" property="regDate"/>
+</resultMap>
+
+
+<!-- QnA게시물 등록 -->
+<insert id="qnaBoardInsert" parameterType="com.icia.web.model.QnaBoard">
+<!-- 선행처리기(시퀀스번호 생성 -->
+<selectKey resultType="long" keyProperty="qnaSeq" order="BEFORE">
+	SELECT QNA_BOARD_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO QNA_BOARD (
+    QNA_SEQ,
+    QNA_TITLE,
+    USER_ID,
+    REG_DATE,
+    QNA_GROUP,
+    QNA_ORDER,
+    QNA_INDENT,
+    QNA_PARENT,
+    QNA_CONTENT,
+    ANS_STATUS
+) VALUES (
+    #{qnaSeq},
+    #{qnaTitle},
+    #{userId},
+    SYSDATE,
+    #{qnaGroup},
+    #{qnaOrder},
+    #{qnaIndent},
+    #{qnaParent},
+    #{qnaContent},
+    #{ansStatus}
+)
+</insert>
+
+<!-- QNA게시판 리스트 -->
+<select id="qnaBoardList" parameterType="com.icia.web.model.QnaBoard" resultMap="qnaBoardResultMap">
+SELECT  QNA_SEQ,
+        QNA_TITLE,
+        USER_ID,
+        USER_NAME,
+        REG_DATE,
+        QNA_GROUP,
+        QNA_ORDER,
+        QNA_INDENT,
+        QNA_PARENT,
+        QNA_CONTENT,
+        ANS_STATUS
+    FROM(SELECT ROWNUM AS RNUM,
+            QNA_SEQ,
+            QNA_TITLE,
+            USER_ID,
+            USER_NAME,
+            REG_DATE,
+            QNA_GROUP,
+            QNA_ORDER,
+            QNA_INDENT,
+            QNA_PARENT,
+            QNA_CONTENT,
+            ANS_STATUS
+        FROM(SELECT  QNA_SEQ,
+                NVL(QNA_TITLE, '') AS QNA_TITLE,
+                NVL(A.USER_ID, '') AS USER_ID,
+                NVL(B.USER_NAME, '') AS USER_NAME,
+                NVL(TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+                NVL(QNA_GROUP, 0) AS QNA_GROUP,
+                NVL(QNA_ORDER, 0) AS QNA_ORDER,
+                NVL(QNA_INDENT, 0) AS QNA_INDENT,
+                NVL(QNA_PARENT, 0) AS QNA_PARENT,
+                NVL(QNA_CONTENT, '') AS QNA_CONTENT,
+                NVL(ANS_STATUS, '') AS ANS_STATUS
+        FROM QNA_BOARD A,USER_INFO B
+        WHERE A.USER_ID = B.USER_ID
+         ORDER BY A.QNA_GROUP DESC, A.QNA_ORDER ASC, QNA_SEQ ASC))
+        WHERE RNUM <![CDATA[>=]]> #{startRow}		
+   		AND RNUM <![CDATA[<=]]> #{endRow}		
+</select>
+
+<!-- QNA게시물 총 개수 -->
+<select id="qnaBoardListCount" parameterType="com.icia.web.model.QnaBoard" resultType="long">
+SELECT COUNT(A.QNA_SEQ) AS CNT
+  FROM QNA_BOARD A, USER_INFO B
+ WHERE A.USER_ID = B.USER_ID
+</select>
+<!-- QNA 게시물 조회 -->
+<select id = "qnaBoardSelect" parameterType = "long" resultMap = "qnaBoardResultMap">
+SELECT  QNA_SEQ,
+                NVL(QNA_TITLE, '') AS QNA_TITLE,
+                NVL(A.USER_ID, '') AS USER_ID,
+                NVL(B.USER_NAME, '') AS USER_NAME,
+                NVL(TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+                NVL(QNA_GROUP, 0) AS QNA_GROUP,
+                NVL(QNA_ORDER, 0) AS QNA_ORDER,
+                NVL(QNA_INDENT, 0) AS QNA_INDENT,
+                NVL(QNA_PARENT, 0) AS QNA_PARENT,
+                NVL(QNA_CONTENT, '') AS QNA_CONTENT,
+                NVL(ANS_STATUS, '') AS ANS_STATUS
+        FROM QNA_BOARD A,USER_INFO B
+        WHERE QNA_SEQ = #{value}
+        AND A.USER_ID = B.USER_ID
+</select>
+
+
+
+<!--QNA 게시판 답글 작성시 order 수정-->
+<update id="qnaBoardGroupOrderUpdate" parameterType="com.icia.web.model.QnaBoard">
+UPDATE QNA_BOARD
+   SET QNA_ORDER = QNA_ORDER + 1
+ WHERE QNA_GROUP = #{qnaGroup}
+   AND QNA_ORDER <![CDATA[>=]]> #{qnaOrder}
+</update>
+
+<!-- QNA게시물 답글 등록 -->
+<insert id="qnaBoardReplyInsert" parameterType="com.icia.web.model.QnaBoard">
+<!-- 선행처리기(시퀀스번호 생성) -->
+<selectKey resultType="long" keyProperty="qnaSeq" order="BEFORE"> 
+	SELECT QNA_BOARD_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO QNA_BOARD (
+    QNA_SEQ,
+    QNA_TITLE,
+    USER_ID,
+    REG_DATE,
+    QNA_GROUP,
+    QNA_ORDER,
+    QNA_INDENT,
+    QNA_PARENT,
+    QNA_CONTENT
+) VALUES (
+    #{qnaSeq},
+    #{qnaTitle},
+    #{userId},
+    SYSDATE,
+    #{qnaGroup},
+    #{qnaOrder},
+    #{qnaIndent},
+    #{qnaParent},
+    #{qnaContent}
+)
+</insert>
+
+<!--QNA게시물 수정-->
+<update id="qnaBoardUpdate" parameterType="com.icia.web.model.QnaBoard">
+UPDATE QNA_BOARD
+SET QNA_TITLE = #{qnaTitle},
+    QNA_CONTENT = #{qnaContent}
+WHERE QNA_SEQ = #{qnaSeq}
+</update>
+
+<!--QNA게시물 삭제-->
+<delete id="qnaBoardDelete" parameterType="long">
+DELETE FROM QNA_BOARD
+ WHERE QNA_SEQ = #{value}
+</delete>
+
+<!-- QNA게시물 삭제시 답변글수 조회 -->
+<select id="qnaBoardAnswersCount" parameterType="long" resultType="int">
+SELECT COUNT(QNA_SEQ) AS CNT
+   FROM QNA_BOARD
+  WHERE QNA_PARENT = #{value}
+</select>
+
+
+<!-- 등록여부 -->
+<update id="qnaStatusUpdate" parameterType="com.icia.web.model.QnaBoard">
+UPDATE QNA_BOARD
+   SET ANS_STATUS = #{ansStatus}
+ WHERE QNA_SEQ = #{qnaSeq}
+</update>
+
+<!-- QNA 게시물 답변조회 -->
+<select id = "qnaBoardAnsSelect" parameterType = "long" resultMap = "qnaBoardAnsResultMap">
+SELECT  B.QNA_SEQ,
+        NVL(ANS_TITLE, '') AS ANS_TITLE,
+        NVL(ANS_CONTENT, '') AS ANS_CONTENT,
+        NVL(ADMIN_ID, '') AS ADMIN_ID,
+        NVL(TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE
+FROM    QNA_BOARD_ANS A , QNA_BOARD B
+WHERE   B.QNA_SEQ = #{value}
+AND     A.QNA_SEQ = B.QNA_SEQ
+</select>
+
+<!-- 답변 등록 -->
+<insert id="qnaBoardAnsReplyInsert" parameterType="com.icia.web.model.QnaBoardAns">
+INSERT INTO QNA_BOARD_ANS (
+    QNA_SEQ,
+    ANS_TITLE,
+    ANS_CONTENT,
+    ADMIN_ID,
+    REG_DATE
+) VALUES (
+    #{qnaSeq},
+    #{ansTitle},
+    #{ansContent},
+    #{adminId},
+    SYSDATE
+)
+</insert>
+
+<!-- 답변 삭제 -->
+<delete id="qnaBoardAnsDelete" parameterType="long">
+DELETE FROM QNA_BOARD_ANS
+WHERE   QNA_SEQ = #{value}
+</delete>
+
+<!-- 관리자답변 수정 -->
+<update id="qnaBoardAnsUpdate" parameterType="com.icia.web.model.QnaBoardAns">
+UPDATE QNA_BOARD_ANS
+SET  ANS_TITLE = #{ansTitle},
+     ANS_CONTENT = #{ansContent}
+WHERE QNA_SEQ = #{qnaSeq}
+</update>
+<!-- 답글 존재여부 확인 -->
+<select id="qnaBoardAnsCheck" parameterType="long" resultType="int">
+SELECT COUNT(QNA_SEQ) AS CNT
+   FROM QNA_BOARD_ANS
+  WHERE QNA_SEQ = #{value}
+</select>
+
+
+<!-- 마이페이지/문의내역 리스트(내가 쓴 QnA 게시물만 select) -->
+<select id="myQnaList" parameterType="com.icia.web.model.QnaBoard" resultMap="qnaBoardResultMap">
+SELECT QNA_SEQ,
+       QNA_TITLE,
+       USER_ID,
+       REG_DATE,
+       QNA_GROUP,
+       QNA_ORDER,
+       QNA_INDENT,
+       QNA_PARENT,
+       QNA_CONTENT,
+       ANS_STATUS
+   FROM(SELECT ROWNUM AS RNUM,
+               QNA_SEQ,
+               QNA_TITLE,
+               USER_ID,
+               REG_DATE,
+               QNA_GROUP,
+               QNA_ORDER,
+               QNA_INDENT,
+               QNA_PARENT,
+               QNA_CONTENT,
+               ANS_STATUS
+            FROM(SELECT QNA_SEQ,
+                        NVL(QNA_TITLE, '') AS QNA_TITLE,
+                        NVL(USER_ID, '') AS USER_ID,
+                        NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD'), '') AS REG_DATE,
+                        NVL(QNA_GROUP, '') AS QNA_GROUP,
+                        NVL(QNA_ORDER, '') AS QNA_ORDER,
+                        NVL(QNA_INDENT, '') AS QNA_INDENT,
+                        NVL(QNA_PARENT, '') AS QNA_PARENT,
+                        NVL(QNA_CONTENT, '') AS QNA_CONTENT,
+                        NVL(ANS_STATUS, '') AS ANS_STATUS
+                     FROM QNA_BOARD
+                    WHERE USER_ID = #{userId}
+             <if test='searchValue != null and searchValue != ""'>
+                      AND QNA_TITLE LIKE '%' || #{searchValue} || '%'
+             </if>
+                  
+             <if test='orderByRegDate != null and orderByRegDate != "" and orderByRegDate == "DESC"'>    
+                    ORDER BY REG_DATE DESC
+             </if>
+             
+             <if test='orderByRegDate != null and orderByRegDate != "" and orderByRegDate == "ASC"'>    
+                    ORDER BY REG_DATE ASC
+             </if>
+                    ))
+    WHERE RNUM <![CDATA[>=]]> #{startRow}
+      AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+
+
+<!-- 마이페이지/문의내역 총 개수 -->
+<select id="myQnaListTotalCount" parameterType="com.icia.web.model.QnaBoard" resultType="int">
+SELECT COUNT(QNA_SEQ) AS TOTAL_COUNT
+    FROM QNA_BOARD
+    WHERE USER_ID = #{userId}
+   <if test='searchValue != null and searchValue != ""'>    
+         AND QNA_TITLE LIKE '%' || #{searchValue} || '%'
+   </if>
+</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

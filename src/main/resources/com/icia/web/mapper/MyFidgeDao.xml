@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.MyFridgeDao">
+
+<!-- 레시피 resultMap -->
+<resultMap id="recipeInfoResultMap" type="com.icia.web.model.RecipeInfo">
+<id column="BBS_READ_CNT" property="bbsReadCnt" />
+	   <result column="RECIPE_CODE" property="recipeCode"/>
+       <result column="RECIPE_NAME" property="recipeName"/>
+       <result column="RECIPE_QNT" property="recipeQnt"/>
+       <result column="RECIPE_TIME" property="recipeTime"/>
+       <result column="NATION_CODE" property="nationCode"/>
+       <result column="FOOD_CODE" property="foodCode"/>
+       <result column="REG_DATE" property="regDate"/>
+       <result column="RECIPE_INTRO" property="recipeIntro"/>
+       <result column="RECIPE_IMAGE" property="recipeImage"/>
+       <result column="BBS_READ_CNT" property="bbsReadCnt"/>
+</resultMap>
+
+<resultMap id ="irdntInfoMap" type="com.icia.web.model.IrdntInfo">
+	<id column="IRDNT_NAME" property="irdntName"/>
+	<result column="IRDNT_IMAGE" property="irdntImage"/>
+</resultMap>
+
+<resultMap id="myFridgeMap" type="com.icia.web.model.MyFridge">
+	<id column="USER_ID" property="userId"/>
+	<result column="FRIDGE_IRDNT_AMOUNT" property="fridgeIrdntAmount"/>
+	<result column="IRDNT_NAME" property="irdntName"/>
+</resultMap>
+
+
+<!-- 여기서부터 유저 냉장고 재료 정보 관련 쿼리 -->
+<!-- 내 냉장고 정보 가져오기 -->
+<select id="myFridgeList" parameterType="com.icia.web.model.MyFridge" resultMap="myFridgeMap">
+	SELECT 
+  USER_ID,
+  IRDNT_NAME,
+  FRIDGE_IRDNT_AMOUNT
+FROM(
+    SELECT 
+        ROWNUM AS RNM,
+        USER_ID AS USER_ID,
+        IRDNT_NAME AS IRDNT_NAME,
+        FRIDGE_IRDNT_AMOUNT AS FRIDGE_IRDNT_AMOUNT
+    FROM
+        ( SELECT 
+            USER_ID ,
+            IRDNT_NAME ,
+            FRIDGE_IRDNT_AMOUNT
+    FROM
+        MY_FRIDGE
+    WHERE    
+        USER_ID=#{userId}
+	AND FRIDGE_IRDNT_AMOUNT > 0
+	    <if test='searchValue !="" and searchValue != null'>
+   	AND IRDNT_NAME LIKE '%' || #{searchValue} ||'%'
+   		</if>
+    ORDER BY 
+        IRDNT_NAME))
+WHERE 
+        RNM <![CDATA[>=]]> #{startRow}
+	AND RNM <![CDATA[<=]]> #{endRow}
+		
+	</select>
+		<!-- 재료 냉장고에 넣기 -->
+	<insert id="myFridgeInsert" parameterType="com.icia.web.model.MyFridge">
+	INSERT  INTO MY_FRIDGE (
+   		    USER_ID,
+    		FRIDGE_IRDNT_AMOUNT,
+    		IRDNT_NAME) 
+    VALUES (
+    	 	#{userId},
+    	 	#{fridgeIrdntAmount},
+   		 	#{irdntName}
+)
+	</insert>
+	
+	<delete id="myFridgeDelete" parameterType="com.icia.web.model.MyFridge">
+		DELETE 
+		FROM MY_FRIDGE
+		WHERE
+        	USER_ID = #{userId}
+    	AND IRDNT_NAME = #{irdntName}
+	</delete>
+	
+	<update id="myFridgeUpdate" parameterType="com.icia.web.model.MyFridge">
+	UPDATE MY_FRIDGE
+	SET
+	    FRIDGE_IRDNT_AMOUNT = #{fridgeIrdntAmount}
+	WHERE
+	        USER_ID = #{userId}
+	        AND IRDNT_NAME = #{irdntName}
+	</update>
+	
+
+	<select id="myFridgeCount" parameterType="com.icia.web.model.MyFridge" resultType="long">
+	SELECT COUNT(IRDNT_NAME) AS CNT
+	FROM MY_FRIDGE
+	WHERE USER_ID = #{userId}
+	 <if test='searchValue !="" and searchValue != null'>
+	AND IRDNT_NAME LIKE '%' || #{searchValue} ||'%'
+	</if>
+	</select>
+	
+<!-- 여기서부터 유저 냉장고 재료 정보 관련 쿼리 끝 -->
+<!-- 재료 관련 쿼리 -->
+<!-- 재료 조회 쿼리  -->
+	<select id="irdntInfoList" parameterType="com.icia.web.model.IrdntInfo" resultMap="irdntInfoMap">
+	SELECT IRDNT_NAME,
+            IRDNT_IMAGE
+            FROM(
+SELECT 
+    ROWNUM AS RNM,
+    IRDNT_NAME,
+    IRDNT_IMAGE
+    FROM(
+SELECT 
+    IRDNT_NAME AS IRDNT_NAME,
+    IRDNT_IMAGE AS IRDNT_IMAGE
+FROM IRDNT_INFO
+WHERE 1=1
+    <if test='searchValue !="" and searchValue != null'>
+    AND IRDNT_NAME LIKE '%' || #{searchValue} ||'%'
+    </if>
+ORDER BY IRDNT_NAME ASC))
+WHERE
+ 	RNM <![CDATA[>=]]> #{startRow}
+AND RNM <![CDATA[<=]]> #{endRow}
+
+	</select>
+	
+		<select id="irdntCount" parameterType="com.icia.web.model.IrdntInfo" resultType="long">
+		SELECT COUNT(IRDNT_NAME) AS CNT
+		FROM IRDNT_INFO
+		WHERE IRDNT_NAME LIKE'%' || #{searchValue} ||'%'
+	</select>
+
+<!-- 재료 관련 쿼리 끝 -->
+
+
+
+	<!-- 유저 냉장고의 재료랑 레시피랑 비교해서 가능한 레시피 코드 가져오기  -->
+	
+
+		<!-- !여기서부턴 건들 생각 하지 말자! -->
+		<!-- !여기서부턴 건들 생각 하지 말자! -->
+		<!-- !여기서부턴 건들 생각 하지 말자! -->
+		<!-- !여기서부턴 건들 생각 하지 말자! -->
+	<!-- 유저 가능 RecipeInfo 가져오기 이름순으로 정렬  -->
+<select id = "possibleRecipe" parameterType="com.icia.web.model.RecipeInfo" resultMap="recipeInfoResultMap">
+SELECT
+ RECIPE_CODE,
+    RECIPE_NAME,
+    RECIPE_QNT,
+    RECIPE_TIME,
+    NATION_CODE ,
+    FOOD_CODE,
+    REG_DATE,
+    RECIPE_INTRO,
+    RECIPE_IMAGE,
+    USER_ID,
+    BBS_READ_CNT 
+FROM(SELECT
+    ROWNUM AS RNM,
+    RECIPE_CODE AS RECIPE_CODE,
+    RECIPE_NAME AS RECIPE_NAME,
+    RECIPE_QNT AS RECIPE_QNT,
+    RECIPE_TIME AS RECIPE_TIME,
+    NATION_CODE AS NATION_CODE,
+    FOOD_CODE AS FOOD_CODE,
+    REG_DATE AS REG_DATE,
+    RECIPE_INTRO AS RECIPE_INTRO,
+    RECIPE_IMAGE AS RECIPE_IMAGE,
+    USER_ID AS USER_ID,
+    BBS_READ_CNT AS BBS_READ_CNT
+FROM
+    (
+             SELECT RECOUA.RECIPE_CODE AS FIND_RECIPE_CODE
+				  FROM(SELECT RECIPE_CODE,COUNT(*) AS RECOU
+			      		 FROM RECIPE_IRDNT
+			    		WHERE IRDNT_TYPE_CODE = 3060001
+			    	 GROUP BY RECIPE_CODE) RECOUA,
+			    	   (SELECT RECIPE_CODE,COUNT(*) AS MYC
+			       		  FROM (SELECT DISTINCT * 
+			                      FROM (SELECT DISTINCT *
+			                              FROM (SELECT IRDNT_NAME, 
+			                                           TO_NUMBER(FRIDGE_IRDNT_AMOUNT) AS MYA
+			                                      FROM MY_FRIDGE
+			                                     WHERE USER_ID = #{userId})) MY,
+			                   (SELECT DISTINCT TO_NUMBER(REPLACE(IRDNT_AMOUNT,'g'))AS RA, 
+			                           RECIPE_CODE,
+			                           IRDNT_NAME
+			                      FROM RECIPE_IRDNT
+			                     WHERE IRDNT_TYPE_CODE = 3060001) RE
+			             WHERE RE.IRDNT_NAME = MY.IRDNT_NAME
+			               AND MYA <![CDATA[>]]> RA) 
+			          GROUP BY RECIPE_CODE) MC
+			    WHERE RECOU = MYC 
+			      AND RECOUA.RECIPE_CODE = MC.RECIPE_CODE) A,
+                  RECIPE_INFO B
+WHERE
+RECIPE_CODE =FIND_RECIPE_CODE
+ORDER BY RECIPE_NAME ASC)
+WHERE 1=1
+AND RNM<![CDATA[>=]]>#{startRow}
+AND RNM <![CDATA[<=]]>#{endRow}
+AND RECIPE_NAME LIKE'%' || #{searchValue} ||'%'
+	</select>
+	
+	<!-- 유저 가능 RecipeInfo 숫자 가져오기(페이징 처리)  -->
+	<select id ="possibleRecipeCount" parameterType="com.icia.web.model.RecipeInfo" resultType="long">
+SELECT
+	COUNT(*)
+FROM(SELECT
+		    ROWNUM AS RNM,
+		    RECIPE_CODE AS RECIPE_CODE,
+		    RECIPE_NAME AS RECIPE_NAME,
+		    RECIPE_QNT AS RECIPE_QNT,
+		    RECIPE_TIME AS RECIPE_TIME,
+		    NATION_CODE AS NATION_CODE,
+		    FOOD_CODE AS FOOD_CODE,
+		    REG_DATE AS REG_DATE,
+		    RECIPE_INTRO AS RECIPE_INTRO,
+		    RECIPE_IMAGE AS RECIPE_IMAGE,
+		    USER_ID AS USER_ID,
+		    BBS_READ_CNT AS BBS_READ_CNT
+		FROM
+		    (
+             SELECT RECOUA.RECIPE_CODE AS FIND_RECIPE_CODE
+			   FROM (
+			   		SELECT RECIPE_CODE,COUNT(*) AS RECOU
+			      	  FROM RECIPE_IRDNT
+			    	 WHERE IRDNT_TYPE_CODE = 3060001
+			    	 GROUP BY RECIPE_CODE) RECOUA,
+			    	   (SELECT RECIPE_CODE,COUNT(*) AS MYC
+			       		  FROM (SELECT DISTINCT * 
+			                      FROM (SELECT DISTINCT *
+			                              FROM (SELECT IRDNT_NAME, 
+			                                           TO_NUMBER(FRIDGE_IRDNT_AMOUNT) AS MYA
+			                                      FROM MY_FRIDGE
+			                                     WHERE USER_ID = #{userId})) MY,
+			                   (SELECT DISTINCT TO_NUMBER(REPLACE(IRDNT_AMOUNT,'g'))AS RA, 
+			                           RECIPE_CODE,
+			                           IRDNT_NAME
+			                      FROM RECIPE_IRDNT
+			                     WHERE IRDNT_TYPE_CODE = 3060001) RE
+			             WHERE RE.IRDNT_NAME = MY.IRDNT_NAME
+			               AND MYA <![CDATA[>]]> RA) 
+			          GROUP BY RECIPE_CODE) MC
+			    WHERE RECOU = MYC 
+			      AND RECOUA.RECIPE_CODE = MC.RECIPE_CODE) A,
+                  RECIPE_INFO B
+		WHERE
+		RECIPE_CODE =FIND_RECIPE_CODE
+		ORDER BY RECIPE_NAME ASC)
+WHERE 1=1
+AND RECIPE_NAME LIKE'%' || #{searchValue} ||'%'
+		
+	</select >
+	
+	<select id ="irdntDuplicate" parameterType="com.icia.web.model.MyFridge" resultType="int">
+	SELECT COUNT(IRDNT_NAME)
+FROM MY_FRIDGE
+WHERE 
+USER_ID =#{userId}
+AND IRDNT_NAME = #{irdntName}
+	
+	</select>
+
+</mapper>

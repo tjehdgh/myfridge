@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.MyPageDao">
+
+<resultMap type="com.icia.web.model.MyPage" id="MyPageResultMap">
+  	<id column="USER_ID" property="userId" />
+  	<result column="RECIPE_CODE" property="recipeCode" />
+  	<result column="RECIPE_INTRO" property="recipeIntro" />
+  	<result column="RECIPE_IMAGE" property="recipeImage" />
+  	<result column="RECIPE_NAME" property="recipeName" />
+  </resultMap>
+
+
+
+
+
+<select id="randomBookMark" parameterType="String" resultMap="MyPageResultMap">
+SELECT USER_ID, RECIPE_CODE,RECIPE_INTRO,  RECIPE_IMAGE, RECIPE_NAME
+    FROM (SELECT B.USER_ID, B.RECIPE_CODE, A.RECIPE_IMAGE, A.RECIPE_NAME, A.RECIPE_INTRO
+             FROM RECIPE_INFO A, USER_BOOKMARK B
+             WHERE B.USER_ID = #{value}
+               AND A.RECIPE_CODE = B.RECIPE_CODE
+             ORDER BY DBMS_RANDOM.RANDOM) C
+    WHERE ROWNUM <![CDATA[<=]]> 3 
+</select>
+
+
+
+
+</mapper>

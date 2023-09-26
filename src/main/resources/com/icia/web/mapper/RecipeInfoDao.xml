@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.RecipeInfoDao">
+
+<!-- 레시피 resultMap -->
+<resultMap id="recipeInfoResultMap" type="com.icia.web.model.RecipeInfo">
+<id column="BBS_READ_CNT" property="bbsReadCnt" />
+	   <result column="RECIPE_CODE" property="recipeCode"/>
+       <result column="RECIPE_NAME" property="recipeName"/>
+       <result column="RECIPE_QNT" property="recipeQnt"/>
+       <result column="RECIPE_TIME" property="recipeTime"/>
+       <result column="NATION_CODE" property="nationCode"/>
+       <result column="FOOD_CODE" property="foodCode"/>
+       <result column="REG_DATE" property="regDate"/>
+       <result column="RECIPE_INTRO" property="recipeIntro"/>
+       <result column="RECIPE_IMAGE" property="recipeImage"/>
+       <result column="USER_ID" property="userId"/>
+       <result column="RCM_CNT" property="rcmCnt" />
+</resultMap>
+
+<!-- 마이페이지 내가 찜한 레시피 리스트들 -->
+<resultMap id="myBookMarkMap" type="com.icia.web.model.RecipeInfo" >
+	<id column="RECIPE_CODE" property="recipeCode" />
+	<result column="RECIPE_NAME" property="recipeName"/>
+    <result column="RECIPE_QNT" property="recipeQnt"/> 
+    <result column="RECIPE_TIME" property="recipeTime"/>
+    <result column="NATION_CODE" property="nationCode"/>
+    <result column="FOOD_CODE" property="foodCode"/>
+    <result column="REG_DATE" property="regDate"/>
+    <result column="RECIPE_INTRO" property="recipeIntro"/>
+    <result column="RECIPE_IMAGE" property="recipeImage"/>
+    <result column="USER_ID" property="userId"/>
+    <result column="BBS_READ_CNT" property="bbsReadCnt"/>
+</resultMap>
+
+
+<!-- 레시피 NATION RESULTMAP -->
+<resultMap id="nationRecipeInfoMap" type="com.icia.web.model.RecipeInfo">
+<id column="NATION_CODE" property="nationCode" />
+	   <result column="NATION_NM" property="nationNm"/>
+       <result column="RECIPE_CODE" property="recipeCode"/>
+       <result column="RECIPE_NAME" property="recipeName"/>
+       <result column="RECIPE_QNT" property="recipeQnt"/>
+       <result column="RECIPE_TIME" property="recipeTime"/>
+       <result column="FOOD_CODE" property="foodCode"/>
+       <result column="REG_DATE" property="regDate"/>
+       <result column="RECIPE_INTRO" property="recipeIntro"/>
+       <result column="RECIPE_IMAGE" property="recipeImage"/>
+       <result column="USER_ID" property="userId"/>
+       <result column="BBS_READ_CNT" property="bbsReadCnt"/>
+</resultMap>
+
+<!-- 레시피 상세조회(INFO)resultMap -->
+<resultMap id="recipeInfoSelectResultMap" type="com.icia.web.model.RecipeInfo">
+<id column="RECIPE_CODE" property="recipeCode" />
+		<result column="RECIPE_NAME" property="recipeName"/>
+		<result column="RECIPE_QNT" property="recipeQnt"/>
+		<result column="RECIPE_TIME" property="recipeTime"/>
+		<result column="NATION_CODE" property="nationCode"/>
+		<result column="FOOD_CODE" property="foodCode"/>
+		<result column="REG_DATE" property="regDate"/>
+		<result column="RECIPE_INTRO" property="recipeIntro"/>
+		<result column="RECIPE_IMAGE" property="recipeImage"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="BBS_READ_CNT" property="bbsReadCnt"/>		
+</resultMap>
+
+<!-- 레시피 상세조회(재료)resultMap -->
+<resultMap id="recipeIrdntSelectResultMap" type="com.icia.web.model.RecipeIrdnt">
+<id column="RECIPE_CODE" property="recipeCode" />
+		<result column="IRDNT_AMOUNT" property="irdntAmount" />
+		<result column="IRDNT_NAME" property="irdntName" />
+		<result column="IRDNT_TYPE_CODE" property="irdntTypeCode" />	
+</resultMap>
+
+<!-- 레시피 상세조회(조리과정)resultMap -->
+<resultMap id="recipeCookingSelectResultMap" type="com.icia.web.model.RecipeCooking">
+<id column="RECIPE_CODE" property="recipeCode" />
+		<result column="COOKING_ORDER" property="cookingOrder" />
+		<result column="COOKING_IMAGE" property="cookingImage" />
+		<result column="COOKING_EXPLAN" property="cookingExplan" />
+</resultMap>
+
+<!-- 내가 등록한 레시피 -->
+<resultMap type="com.icia.web.model.RecipeInfo" id="recipeInfoMap">
+	<id column="RECIPE_CODE" property="recipeCode" />
+	<result column="RECIPE_NAME" property="recipeName"/>
+	<result column="RECIPE_QNT" property="recipeQnt"/>
+	<result column="RECIPE_TIME" property="recipeTime"/>
+	<result column="NATION_CODE" property="nationCode"/>
+	<result column="FOOD_CODE" property="foodCode"/>
+	<result column="REG_DATE" property="regDate"/>
+	<result column="RECIPE_INTRO" property="recipeIntro"/>
+	<result column="RECIPE_IMAGE" property="recipeImage"/>
+</resultMap>
+
+<!-- 레시피 댓글 리스트 resultMap-->
+<resultMap type="com.icia.web.model.RecipeReply" id="recipeReplyListResultMap">
+<id column="RECIPE_CODE" property="recipeCode" />
+<result column="USER_ID" property="userId" />
+<result column="REPLY_CONTENT" property="replyContent" />
+<result column="REG_DATE" property="regDate" />
+<result column="USER_NICKNAME" property="userNickname" />
+<result column="FILE_EXT" property="fileExt" />
+</resultMap>
+
+
+<!-- 레시피 리스트(조회순) -->
+<select id="recipeList" parameterType="com.icia.web.model.RecipeInfo" resultMap="recipeInfoResultMap">
+SELECT RECIPE_CODE,
+       RECIPE_NAME,
+       RECIPE_QNT,
+       RECIPE_TIME,
+       NATION_CODE,
+       FOOD_CODE,
+       REG_DATE,
+       RECIPE_INTRO,
+       RECIPE_IMAGE,
+       USER_ID,
+       BBS_READ_CNT
+  FROM(SELECT ROWNUM AS RNUM, 
+              RECIPE_CODE,
+              RECIPE_NAME,
+              RECIPE_QNT,
+              RECIPE_TIME,
+              NATION_CODE,
+              FOOD_CODE,
+              REG_DATE,
+              RECIPE_INTRO,
+              RECIPE_IMAGE,
+              USER_ID,
+              BBS_READ_CNT
+         FROM(SELECT RECIPE_CODE AS RECIPE_CODE,
+                     NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+                     NVL(RECIPE_QNT, '') AS RECIPE_QNT,
+                     NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+                     NATION_CODE AS NATION_CODE,
+                     FOOD_CODE AS FOOD_CODE,
+                     NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), SYSDATE) AS REG_DATE,
+                     NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+                     NVL(RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+                     NVL(USER_ID, '') AS USER_ID,
+                     NVL(BBS_READ_CNT, 0) AS BBS_READ_CNT
+                FROM RECIPE_INFO
+               ORDER BY BBS_READ_CNT DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}	
+   AND RNUM <![CDATA[<=]]> #{endRow}		
+</select>
+
+<!-- 총 레시피 갯수 -->
+<select id="recipeListCount" parameterType="com.icia.web.model.RecipeInfo" resultType="long">
+SELECT COUNT(A.RECIPE_CODE) AS TOTAL_COUNT
+  FROM  RECIPE_INFO A , CATEGORY_NATION B
+			WHERE 1 = 1 
+<if test='searchType != null and searchType != ""'>			
+			AND   A.NATION_CODE = #{searchType}
+</if>
+
+
+<if test='searchValue != null and searchValue != ""'>
+            AND A.RECIPE_NAME LIKE '%' || #{searchValue} ||'%' 
+</if>
+
+			AND A.NATION_CODE = B.NATION_CODE
+
+</select>
+
+
+<!-- 음식코드 레시피 -->
+<select id = "recipeNationList" parameterType="com.icia.web.model.RecipeInfo" resultMap="nationRecipeInfoMap">
+SELECT
+    NATION_NM,
+    RECIPE_CODE,
+    RECIPE_NAME,
+    RECIPE_QNT,
+    RECIPE_TIME,
+    NATION_CODE,
+    FOOD_CODE,
+    REG_DATE,
+    RECIPE_INTRO,
+    RECIPE_IMAGE,
+    USER_ID,
+    BBS_READ_CNT
+	FROM  (SELECT ROWNUM RNUM,
+	    NATION_NM,
+	    RECIPE_CODE,
+	    RECIPE_NAME,
+	    RECIPE_QNT,
+	    RECIPE_TIME,
+	    NATION_CODE,
+	    FOOD_CODE,
+	    REG_DATE,
+	    RECIPE_INTRO,
+	    RECIPE_IMAGE,
+	    USER_ID,
+	    BBS_READ_CNT 
+		FROM(SELECT  A.NATION_CODE,
+				    NVL(B.NATION_NM, '') AS NATION_NM,
+				    NVL(A.RECIPE_CODE, 0) AS RECIPE_CODE,
+				    NVL(A.RECIPE_NAME, '') AS RECIPE_NAME,
+				    NVL(A.RECIPE_QNT, '') AS RECIPE_QNT,
+				    NVL(A.RECIPE_TIME, '') AS RECIPE_TIME,   
+				    NVL(A.FOOD_CODE, 0) AS FOOD_CODE,
+				    NVL(TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+				    NVL(A.RECIPE_INTRO, '') AS RECIPE_INTRO,
+				    NVL(A.RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+				    NVL(A.USER_ID, '')AS USER_ID,
+				    NVL(A.BBS_READ_CNT, 0)AS BBS_READ_CNT
+			FROM  RECIPE_INFO A , CATEGORY_NATION B
+			WHERE 1 = 1 
+<if test='searchType != null and searchType != ""'>			
+			AND   A.NATION_CODE = #{searchType}
+</if>
+
+
+<if test='searchValue != null and searchValue != ""'>
+            AND A.RECIPE_NAME LIKE '%' || #{searchValue} ||'%' 
+</if>
+
+
+
+			AND A.NATION_CODE = B.NATION_CODE
+		ORDER BY A.RECIPE_CODE DESC))
+		WHERE RNUM <![CDATA[>=]]> #{startRow}	
+   		  AND RNUM <![CDATA[<=]]> #{endRow}	
+</select>			
+
+<!-- 레시피 상세조회(INFO) -->
+<select id="recipeInfoSelect" parameterType="int" resultMap="recipeInfoSelectResultMap">
+SELECT RECIPE_CODE AS RECIPE_CODE,
+       NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+       NVL(RECIPE_QNT, 0) AS RECIPE_QNT,
+       NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+       NATION_CODE AS NATION_CODE,
+       FOOD_CODE AS FOOD_CODE,
+       NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+       NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+       NVL(RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+       NVL(USER_ID, '') AS USER_ID,
+       NVL(BBS_READ_CNT, 0) AS BBS_READ_CNT
+  FROM RECIPE_INFO
+ WHERE RECIPE_CODE = #{value}
+</select>
+
+<!-- 레시피 상세조회(주재료) -->
+<select id="recipeIrdntSelect" parameterType="int" resultMap="recipeIrdntSelectResultMap">
+SELECT NVL(IRDNT_AMOUNT, '') AS IRDNT_AMOUNT,
+       NVL(IRDNT_NAME, '') AS IRDNT_NAME,
+       RECIPE_CODE AS RECIPE_CODE,
+       IRDNT_TYPE_CODE AS IRDNT_TYPE_CODE
+  FROM RECIPE_IRDNT
+ WHERE RECIPE_CODE = #{value}
+ AND IRDNT_TYPE_CODE = 3060001
+ ORDER BY IRDNT_TYPE_CODE ASC
+</select>
+
+<!-- 레시피 상세조회(조리과정) -->
+<select id="recipeCookingSelect" parameterType="int" resultMap="recipeCookingSelectResultMap">
+SELECT NVL(COOKING_ORDER, 0) AS COOKING_ORDER,
+       NVL(COOKING_IMAGE, '') AS COOKING_IMAGE,
+       RECIPE_CODE AS RECIPE_CODE,
+       NVL(COOKING_EXPLAN, '') AS COOKING_EXPLAN
+  FROM RECIPE_COOKING
+ WHERE RECIPE_CODE = #{value}
+ ORDER BY COOKING_ORDER ASC
+</select>
+
+<!-- 레시피 상세조회(부재료) -->
+<select id="recipeIrdntSelect2" parameterType="int" resultMap="recipeIrdntSelectResultMap">
+SELECT NVL(IRDNT_AMOUNT, '') AS IRDNT_AMOUNT,
+       NVL(IRDNT_NAME, '') AS IRDNT_NAME,
+       RECIPE_CODE AS RECIPE_CODE,
+       IRDNT_TYPE_CODE AS IRDNT_TYPE_CODE
+  FROM RECIPE_IRDNT
+ WHERE RECIPE_CODE = #{value}
+ AND IRDNT_TYPE_CODE != 3060001
+ ORDER BY IRDNT_TYPE_CODE ASC
+</select>
+
+
+<!-- 레피시 상세조회시 조회수 증가 -->
+<!-- update, delete, insert문은 처리 건수이므로 리턴 타입이 필요 없음 -->
+<update id="recipeReadCntPlus" parameterType="int">
+UPDATE RECIPE_INFO
+   SET BBS_READ_CNT = BBS_READ_CNT + 1
+ WHERE RECIPE_CODE = ${value}
+</update>
+
+<!-- 마이페이지 최근 등록한 레시피 3개만 보여줌 -->
+<select id="userRecentRegRecipe" parameterType="String" resultMap="recipeInfoMap">
+SELECT RECIPE_CODE, RECIPE_NAME, RECIPE_QNT, RECIPE_TIME, NATION_CODE, FOOD_CODE, REG_DATE, RECIPE_INTRO, RECIPE_IMAGE
+    FROM (SELECT ROWNUM AS RN,
+                RECIPE_CODE,
+                RECIPE_NAME,
+                RECIPE_QNT,
+                RECIPE_TIME,
+                NATION_CODE,
+                FOOD_CODE,
+                REG_DATE,
+                RECIPE_INTRO,
+                RECIPE_IMAGE,
+                USER_ID,
+                BBS_READ_CNT
+            FROM(SELECT  B.RECIPE_CODE,
+                            B.RECIPE_NAME,
+                            B.RECIPE_QNT,
+                            B.RECIPE_TIME,
+                            B.NATION_CODE,
+                            B.FOOD_CODE,
+                            NVL(TO_CHAR(B.REG_DATE, 'YYYY-MM-DD'), '') AS REG_DATE,
+                            B.RECIPE_INTRO,
+                            B.RECIPE_IMAGE,
+                            B.USER_ID,
+                            B.BBS_READ_CNT
+                        FROM USER_INFO A, RECIPE_INFO B
+                        WHERE A.USER_ID = #{value}
+                          AND A.USER_ID = B.USER_ID
+                          ORDER BY REG_DATE DESC))
+    WHERE RN BETWEEN 1 AND 3
+</select>
+
+
+
+
+<!-- 마이페이지 내가 찜한 레시피 리스트 -->
+<select id = "myBookMarkList" parameterType="com.icia.web.model.RecipeInfo" resultMap="myBookMarkMap">
+SELECT  RECIPE_CODE,
+        RECIPE_NAME,
+        RECIPE_QNT,
+        RECIPE_TIME,
+        NATION_CODE,
+        FOOD_CODE,
+        REG_DATE,
+        RECIPE_INTRO,
+        RECIPE_IMAGE,
+        USER_ID,
+        BBS_READ_CNT
+   FROM (SELECT  ROWNUM AS RNUM,
+                RECIPE_CODE,
+                RECIPE_NAME,
+                RECIPE_QNT,
+                RECIPE_TIME,
+                NATION_CODE,
+                FOOD_CODE,
+                REG_DATE,
+                RECIPE_INTRO,
+                RECIPE_IMAGE,
+                USER_ID,
+                BBS_READ_CNT
+           FROM (SELECT A.RECIPE_CODE,
+                        NVL(A.RECIPE_NAME, '') AS RECIPE_NAME,
+                        NVL(A.RECIPE_QNT, '') AS RECIPE_QNT,
+                        NVL(A.RECIPE_TIME, '') AS RECIPE_TIME,
+                        NVL(A.NATION_CODE, '') AS NATION_CODE,
+                        NVL(A.FOOD_CODE, '') AS FOOD_CODE,
+                        NVL(TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+                        NVL(A.RECIPE_INTRO, '') AS RECIPE_INTRO,
+                        NVL(A.RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+                        NVL(A.USER_ID, '') AS USER_ID,
+                        NVL(A.BBS_READ_CNT, '') AS BBS_READ_CNT
+                    FROM RECIPE_INFO A, USER_BOOKMARK B
+                   WHERE B.USER_ID = #{userId}
+                     AND A.RECIPE_CODE = B.RECIPE_CODE
+<if test='recipeName != null and recipeName != ""'>
+                     AND A.RECIPE_NAME LIKE '%' || #{recipeName} || '%'
+</if>
+
+<if test='recipeIntro != null and recipeIntro != ""'>
+                     AND DBMS_LOB.INSTR(A.RECIPE_INTRO, #{recipeIntro}) > 0 
+</if>
+                   ORDER BY A.REG_DATE DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}	
+   AND RNUM <![CDATA[<=]]> #{endRow}	
+</select>
+
+
+
+
+
+<!-- 마이페이지 찜한레시피 총 게시물수 -->
+<select id="bookMarkTotalCount" parameterType="com.icia.web.model.RecipeInfo" resultType="int">
+SELECT COUNT(A.RECIPE_CODE) AS TOTAL_COUNT
+       FROM RECIPE_INFO A, USER_BOOKMARK B
+       WHERE B.USER_ID = #{userId}
+         AND A.RECIPE_CODE = B.RECIPE_CODE
+<if test='recipeName != null and recipeName != ""'>
+         AND A.RECIPE_NAME LIKE '%' || #{recipeName} || '%'
+</if>
+
+<if test='recipeIntro != null and recipeIntro != ""'>
+         AND DBMS_LOB.INSTR(A.RECIPE_INTRO, #{recipeIntro}) > 0
+</if>
+</select>
+
+<!-- 레시피 댓글 등록 -->
+<insert id="recipeReplyInsert" parameterType="com.icia.web.model.RecipeReply">
+INSERT INTO RECIPE_REPLY (
+    USER_ID,
+    REPLY_CONTENT,
+    RECIPE_CODE,
+    REG_DATE
+) VALUES (
+    #{userId},
+    #{replyContent},
+    #{recipeCode},
+    SYSDATE
+)
+</insert>
+
+<!-- 레시피 댓글 리스트(레시피 코드별) -->
+<select id="recipeReplyList" parameterType="com.icia.web.model.RecipeReply" resultMap="recipeReplyListResultMap">
+SELECT USER_ID,
+       REPLY_CONTENT,
+       RECIPE_CODE,
+       REG_DATE,
+       USER_NICKNAME,
+       FILE_EXT
+  FROM (SELECT ROWNUM AS RNUM,
+               USER_ID,
+               REPLY_CONTENT,
+               RECIPE_CODE,
+               REG_DATE,
+               USER_NICKNAME,
+               FILE_EXT
+          FROM (SELECT A.USER_ID AS USER_ID,
+                      NVL(A.REPLY_CONTENT, '') AS REPLY_CONTENT,
+                      A.RECIPE_CODE AS RECIPE_CODE,
+                      NVL(TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), SYSDATE) AS REG_DATE,
+                      NVL(B.USER_NICKNAME, '') AS USER_NICKNAME,
+                      NVL(B.FILE_EXT, '') AS FILE_EXT
+                  FROM RECIPE_REPLY A, USER_INFO B
+                 WHERE A.USER_ID = B.USER_ID
+                   AND RECIPE_CODE = #{recipeCode}
+                 ORDER BY A.REG_DATE DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}   
+   AND RNUM <![CDATA[<=]]> #{endRow}   
+</select>
+
+<!-- 레시피 댓글 수(레시피 코드별) -->
+<select id="recipeReplyListCount" parameterType="com.icia.web.model.RecipeReply" resultType="long">
+SELECT COUNT(REPLY_CONTENT) AS TOTAL_COUNT
+  FROM RECIPE_REPLY
+ WHERE RECIPE_CODE = #{value}
+</select>
+
+<!-- 레시피 추천수 등록 -->
+<insert id="recipeRcmInsert" parameterType="com.icia.web.model.RecipeRcm">
+INSERT INTO RECIPE_RCM_CNT (
+    USER_ID,
+    RECIPE_CODE,
+    REG_DATE,
+   	RCM_CHECK
+) VALUES (
+    #{userId},
+    #{recipeCode},
+    SYSDATE,
+    1
+)
+</insert>
+
+<!-- 레시피 추천여부 확인 -->
+<select id="recipeRcmCheck" parameterType="com.icia.web.model.RecipeRcm" resultType="long">
+SELECT COUNT(RECIPE_CODE) AS TOTAL_COUNT
+ FROM RECIPE_RCM_CNT
+ WHERE RECIPE_CODE = #{recipeCode}
+   AND USER_ID = #{userId}
+   AND RCM_CHECK = 1
+</select>
+
+
+
+<!-- 레시피 추천 갯수(레시피 코드별, 유저 아이디별 -->
+<select id="recipeRcmCount" parameterType="com.icia.web.model.RecipeRcm" resultType="long">
+SELECT COUNT(USER_ID) AS RCM_COUNT
+  FROM RECIPE_RCM_CNT
+ WHERE RECIPE_CODE = #{recipeCode}
+   AND USER_ID = #{userId}
+</select>
+
+<!-- 마이페이지 나만의 레시피 리스트 가져오기 -->
+<select id = "myRecipeList" parameterType="com.icia.web.model.RecipeInfo" resultMap="myBookMarkMap">
+SELECT  RECIPE_CODE,
+        RECIPE_NAME,
+        RECIPE_QNT,
+        RECIPE_TIME,
+        NATION_CODE,
+        FOOD_CODE,
+        REG_DATE,
+        RECIPE_INTRO,
+        RECIPE_IMAGE,
+        USER_ID,
+        BBS_READ_CNT
+   FROM (SELECT ROWNUM AS RNUM,
+                RECIPE_CODE,
+                RECIPE_NAME,
+                RECIPE_QNT,
+                RECIPE_TIME,
+                NATION_CODE,
+                FOOD_CODE,
+                REG_DATE,
+                RECIPE_INTRO,
+                RECIPE_IMAGE,
+                USER_ID,
+                BBS_READ_CNT
+           FROM(SELECT RECIPE_CODE,
+                        NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+                        NVL(RECIPE_QNT, '') AS RECIPE_QNT,
+                        NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+                        NVL(NATION_CODE, '') AS NATION_CODE,
+                        NVL(FOOD_CODE, '') AS FOOD_CODE,
+                        NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+                        NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+                        NVL(RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+                        NVL(USER_ID, '') AS USER_ID,
+                        NVL(BBS_READ_CNT, '') AS BBS_READ_CNT
+                    FROM RECIPE_INFO 
+                   WHERE USER_ID = #{userId}
+           <if test='recipeName != null and recipeName != ""'>
+                    AND RECIPE_NAME LIKE '%' || #{recipeName} || '%'
+           </if>
+           
+           <if test='recipeIntro != null and recipeIntro != ""'>
+                    AND DBMS_LOB.INSTR(RECIPE_INTRO, #{recipeIntro}) > 0 )
+           </if>
+                   ORDER BY REG_DATE DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}	
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+
+<!-- 마이페이지 나만의 레시피 총 게시물 수 -->
+<select id="myRecipeTotalCount" parameterType="com.icia.web.model.RecipeInfo" resultType="int">
+SELECT COUNT(RECIPE_CODE) AS TOTAL_COUNT
+    FROM RECIPE_INFO
+    WHERE USER_ID = #{userId}
+<if test='recipeName != null and recipeName != ""'>
+         AND A.RECIPE_NAME LIKE '%' || #{recipeName} || '%'
+</if>
+
+<if test='recipeIntro != null and recipeIntro != ""'>
+         AND DBMS_LOB.INSTR(A.RECIPE_INTRO, #{recipeIntro}) > 0
+</if>
+</select>
+
+
+<!-- 인덱스 베스트 레시피 리스트(추천수) 1~8 -->
+<select id="indexBestRecipeList" parameterType="com.icia.web.model.RecipeInfo" resultMap="recipeInfoResultMap">
+SELECT RECIPE_CODE,
+       RECIPE_NAME,
+       RECIPE_QNT,
+       RECIPE_TIME,
+       NATION_CODE,
+       FOOD_CODE,
+       REG_DATE,
+       RECIPE_INTRO,
+       RECIPE_IMAGE,
+       USER_ID,
+       BBS_READ_CNT,
+       RCM_CNT
+  FROM(SELECT ROWNUM AS RNUM, 
+              RECIPE_CODE,
+              RECIPE_NAME,
+              RECIPE_QNT,
+              RECIPE_TIME,
+              NATION_CODE,
+              FOOD_CODE,
+              REG_DATE,
+              RECIPE_INTRO,
+              RECIPE_IMAGE,
+              USER_ID,
+              BBS_READ_CNT,
+              RCM_CNT
+         FROM(SELECT RECIPE_CODE AS RECIPE_CODE,
+                     NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+                     NVL(RECIPE_QNT, '') AS RECIPE_QNT,
+                     NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+                     NATION_CODE AS NATION_CODE,
+                     FOOD_CODE AS FOOD_CODE,
+                     NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), SYSDATE) AS REG_DATE,
+                     NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+                     NVL(RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+                     NVL(USER_ID, '') AS USER_ID,
+                     NVL(BBS_READ_CNT, 0) AS BBS_READ_CNT,
+                     NVL(RCM_CNT, 0) AS RCM_CNT
+                FROM RECIPE_INFO
+               ORDER BY RCM_CNT DESC))
+ WHERE RNUM <![CDATA[>=]]> 1   
+   AND RNUM <![CDATA[<=]]> 8
+</select>
+
+
+
+
+<!-- 인덱스페이지 디저트리스트 1~8등 -->
+<select id="indexDessertList" parameterType="com.icia.web.model.RecipeInfo" resultMap="recipeInfoResultMap">
+SELECT RECIPE_CODE,
+       RECIPE_NAME,
+       RECIPE_QNT,
+       RECIPE_TIME,
+       NATION_CODE,
+       FOOD_CODE,
+       REG_DATE,
+       RECIPE_INTRO,
+       RECIPE_IMAGE,
+       USER_ID,
+       BBS_READ_CNT,
+       RCM_CNT
+  FROM(SELECT ROWNUM AS RNUM,
+                RECIPE_CODE,
+                RECIPE_NAME,
+                RECIPE_QNT,
+                RECIPE_TIME,
+                NATION_CODE,
+                FOOD_CODE,
+                REG_DATE,
+                RECIPE_INTRO,
+                RECIPE_IMAGE,
+                USER_ID,
+                BBS_READ_CNT,
+                RCM_CNT
+          FROM(SELECT RECIPE_CODE AS RECIPE_CODE,
+                         NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+                         NVL(RECIPE_QNT, '') AS RECIPE_QNT,
+                         NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+                         NATION_CODE AS NATION_CODE,
+                         FOOD_CODE AS FOOD_CODE,
+                         NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), SYSDATE) AS REG_DATE,
+                         NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+                         NVL(RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+                         NVL(USER_ID, '') AS USER_ID,
+                         NVL(BBS_READ_CNT, 0) AS BBS_READ_CNT,
+                         NVL(RCM_CNT, 0) AS RCM_CNT
+                    FROM RECIPE_INFO
+                    WHERE FOOD_CODE IN ('3010013', '3010014')
+                    ORDER BY RCM_CNT DESC ))
+   WHERE RNUM <![CDATA[>=]]> 1   
+   AND RNUM <![CDATA[<=]]> 8
+</select>
+
+
+<!-- 인덱스페이지 메인요리 1~8등 -->
+<select id="indexMainDishesList" parameterType="com.icia.web.model.RecipeInfo" resultMap="recipeInfoResultMap">
+SELECT RECIPE_CODE,
+       RECIPE_NAME,
+       RECIPE_QNT,
+       RECIPE_TIME,
+       NATION_CODE,
+       FOOD_CODE,
+       REG_DATE,
+       RECIPE_INTRO,
+       RECIPE_IMAGE,
+       USER_ID,
+       BBS_READ_CNT,
+       RCM_CNT
+  FROM(SELECT ROWNUM AS RNUM,
+                RECIPE_CODE,
+                RECIPE_NAME,
+                RECIPE_QNT,
+                RECIPE_TIME,
+                NATION_CODE,
+                FOOD_CODE,
+                REG_DATE,
+                RECIPE_INTRO,
+                RECIPE_IMAGE,
+                USER_ID,
+                BBS_READ_CNT,
+                RCM_CNT
+          FROM(SELECT RECIPE_CODE AS RECIPE_CODE,
+                         NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+                         NVL(RECIPE_QNT, '') AS RECIPE_QNT,
+                         NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+                         NATION_CODE AS NATION_CODE,
+                         FOOD_CODE AS FOOD_CODE,
+                         NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), SYSDATE) AS REG_DATE,
+                         NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+                         NVL(RECIPE_IMAGE, '') AS RECIPE_IMAGE,
+                         NVL(USER_ID, '') AS USER_ID,
+                         NVL(BBS_READ_CNT, 0) AS BBS_READ_CNT,
+                         NVL(RCM_CNT, 0) AS RCM_CNT
+                    FROM RECIPE_INFO
+                    WHERE FOOD_CODE IN ('3010021', '3010010', '3010020', '3010002', '3010005', '3010017', '3010016', '3010009', '3010022', '3010019','3010004', '3010003', '3010006', '3010001', '3010007', '3010018')
+                    ORDER BY RCM_CNT DESC ))
+   WHERE RNUM <![CDATA[>=]]> 1   
+   AND RNUM <![CDATA[<=]]> 8
+</select>  
+
+<!-- 레시피 추천 취소 -->
+<delete id="recipeRcmDelete" parameterType="com.icia.web.model.RecipeRcm">
+DELETE FROM RECIPE_RCM_CNT
+ WHERE USER_ID = #{userId}
+   AND RECIPE_CODE = #{recipeCode}
+</delete>
+
+<!-- 레시피 추천 시 RECIPE_INFO 테이블 추천수 증가 -->
+<update id= "recipeInfoRcmUpdate" parameterType="com.icia.web.model.RecipeInfo">
+UPDATE RECIPE_INFO
+   SET RCM_CNT = RCM_CNT + 1
+ WHERE RECIPE_CODE = #{recipeCode}
+</update>
+
+<!-- 레시피 추천 취소시 RECIPE_INFO 테이블 추천수 취소-->
+<delete id= "recipeInfoRcmUpdateCancel" parameterType="com.icia.web.model.RecipeInfo">
+UPDATE RECIPE_INFO
+   SET RCM_CNT = RCM_CNT - 1
+ WHERE RECIPE_CODE = #{recipeCode}
+</delete>
+
+<!-- 레시피 리스트(추천순) -->
+<select id="recipeListRcm" parameterType="com.icia.web.model.RecipeInfo" resultMap="recipeInfoResultMap">
+SELECT RECIPE_CODE,
+       RECIPE_NAME,
+       RECIPE_QNT,
+       RECIPE_TIME,
+       NATION_CODE,
+       FOOD_CODE,
+       REG_DATE,
+       RECIPE_INTRO,
+       RECIPE_IMAGE,
+       USER_ID,
+       BBS_READ_CNT,
+       RCM_CNT
+  FROM(SELECT ROWNUM AS RNUM,
+              RECIPE_CODE,
+              RECIPE_NAME,
+              RECIPE_QNT,
+              RECIPE_TIME,
+              NATION_CODE,
+              FOOD_CODE,
+              REG_DATE,
+              RECIPE_INTRO,
+              RECIPE_IMAGE,
+              USER_ID,
+              BBS_READ_CNT,
+              RCM_CNT
+         FROM(SELECT RECIPE_CODE,
+                     NVL(RECIPE_NAME, '') AS RECIPE_NAME,
+                     NVL(RECIPE_QNT, '') AS RECIPE_QNT,
+                     NVL(RECIPE_TIME, '') AS RECIPE_TIME,
+                     NATION_CODE,
+                     FOOD_CODE,
+                     NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MM:SS'), SYSDATE) AS REG_DATE,
+                     NVL(RECIPE_INTRO, '') AS RECIPE_INTRO,
+                     NVL(RECIPE_IMAGE , '') AS RECIPE_IMAGE,
+                     NVL(USER_ID, '') AS USER_ID,
+                     NVL(BBS_READ_CNT, 0) AS BBS_READ_CNT,
+                     NVL(RCM_CNT, 0) AS RCM_CNT
+                FROM RECIPE_INFO
+               ORDER BY RCM_CNT DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}	
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 레시피 즐겨찾기 등록 -->
+<insert id="recipeBookMarkInsert" parameterType="com.icia.web.model.BookMark">
+INSERT INTO USER_BOOKMARK (
+    USER_ID,
+    RECIPE_CODE
+) VALUES (
+    #{userId},
+    #{recipeCode}
+)
+</insert>
+
+<!-- 레시피 즐겨찾기 여부 확인 -->
+<select id="recipeBookMarkSelect" parameterType="com.icia.web.model.BookMark" resultType="long">
+SELECT COUNT(USER_ID)
+  FROM USER_BOOKMARK
+ WHERE USER_ID = #{userId}
+   AND RECIPE_CODE = #{recipeCode}
+</select>
+
+<!-- 레시피 즐겨찾기 취소 -->
+<delete id="recipeBookMarkDelete" parameterType="com.icia.web.model.BookMark">
+DELETE 
+  FROM USER_BOOKMARK
+ WHERE USER_ID = #{userId}
+   AND RECIPE_CODE = #{recipeCode}
+</delete>
+
+
+
+
+
+
+
+
+
+</mapper>

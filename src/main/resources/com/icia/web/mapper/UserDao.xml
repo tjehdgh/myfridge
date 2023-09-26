@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.UserDao">
+
+  <resultMap type="com.icia.web.model.User" id="userResultMap">
+     <id column="USER_ID" property="userId" />
+     <result column="USER_PWD" property="userPwd" />
+     <result column="USER_EMAIL" property="email"/>
+     <result column="USER_ADDRESS" property="userAddress" />
+     <result column="USER_AGE" property="userAge" />
+     <result column="USER_GENDER" property="userGender" />
+     <result column="USER_PHONE_NUMBER" property="userPhoneNumber" />
+     <result column="STATUS" property="status" />
+     <result column="REG_DATE" property="regDate" />
+     <result column="USER_ACCOUNT" property="userAccount" />
+     <result column="USER_NAME" property="userName" />
+     <result column="USER_NICKNAME" property="userNickname" />
+     <result column="FILE_EXT" property="fileExt" />
+  </resultMap>   
+  
+  
+
+  
+  <select id="userSelect" parameterType="String" resultMap="userResultMap">     
+   SELECT USER_ID,
+          NVL(USER_PWD, '') AS USER_PWD,
+          NVL(USER_EMAIL, '') AS USER_EMAIL,
+          NVL(USER_ADDRESS, '') AS USER_ADDRESS,
+          NVL(USER_AGE, 0) AS USER_AGE,
+          NVL(USER_GENDER, '') AS USER_GENDER,
+          NVL(USER_PHONE_NUMBER, '') AS USER_PHONE_NUMBER,
+          NVL(STATUS, 'N') AS STATUS,
+          NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+          NVL(USER_ACCOUNT, '') AS USER_ACCOUNT,
+          NVL(USER_NAME, '') AS USER_NAME,
+          NVL(USER_NICKNAME, '') AS USER_NICKNAME,
+          NVL(FILE_EXT, '') AS FILE_EXT
+     FROM USER_INFO
+    WHERE USER_ID = #{value}
+    AND STATUS != 'N'
+  </select>
+  
+  
+  
+  <!-- INSERT, DELETE, UPDATE는 처리 건수로 알아서 resultMap을 해줌 -->
+  <insert id="userInsert" parameterType="com.icia.web.model.User">   
+     INSERT INTO USER_INFO (
+       USER_ID,
+       USER_PWD,
+       USER_EMAIL,
+       USER_ADDRESS,
+       USER_AGE,
+       USER_GENDER,
+       USER_PHONE_NUMBER,
+       STATUS,
+       REG_DATE,
+       USER_ACCOUNT,
+       USER_NAME,
+       USER_NICKNAME
+   ) VALUES (
+       #{userId},
+       #{userPwd},
+       #{email},
+       #{userAddress},
+       #{userAge},
+       #{userGender},
+       #{userPhoneNumber},
+       #{status},
+       SYSDATE,
+       #{userAccount},
+       #{userName},
+       #{userNickname}       
+   )   
+  </insert>
+  
+  
+    
+    
+ <!-- Update, Insert, Delete문은 처리 건수임으로 리턴 타입이 없음 -->
+  <update id="userUpdate" parameterType="com.icia.web.model.User">	
+	 UPDATE USER_INFO
+	    SET USER_PWD = #{userPwd},
+	        USER_ADDRESS = #{userAddress},
+	        USER_AGE = #{userAge},
+	        USER_GENDER = #{userGender},
+	        USER_PHONE_NUMBER = #{userPhoneNumber},
+	        USER_ACCOUNT = #{userAccount},
+	        USER_NAME = #{userName},
+	        USER_NICKNAME = #{userNickname}
+	    WHERE USER_ID = #{userId}
+  </update>    
+
+
+
+
+<!-- 회원탈퇴 (status만 N으로 바뀌게함) -->
+<update id="userdropOut" parameterType="com.icia.web.model.User">
+UPDATE USER_INFO
+    SET STATUS = #{status}
+    WHERE USER_ID = #{userId}
+</update>
+
+<!-- 회원정보수정에서 프로파일 변경시  -->
+<update id="userdFileUpdate" parameterType="com.icia.web.model.User">
+UPDATE USER_INFO
+    SET FILE_EXT = #{fileExt}
+    WHERE USER_ID = #{userId}
+</update>
+
+
+</mapper>
