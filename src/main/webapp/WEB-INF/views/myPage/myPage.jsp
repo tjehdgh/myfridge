@@ -141,14 +141,14 @@ function fn_myRecipeView(recipeCode)
                        <a href="/myPage/myRecipe" class="list-group-item list-group-item-action">나만의 레시피 내역</a> 
                        <a href="/user/dropOut" class="list-group-item list-group-item-action">회원 탈퇴</a>
                        
-                       <div class="card-header bg-primary text-white">고객 센터</div>
-	                    <div class="list-group list-group-flush">
-	                         <a href="/admin/qna" class="list-group-item list-group-item-action">QnA</a>
-			                 <a href="/admin/notice" class="list-group-item list-group-item-action">공지사항</a>
-		                     <a href="/admin/event" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
-			                   </div>
-				                 
-		                     </div>
+                        <div class="card-header bg-primary text-white">고객 센터</div>
+		                    <div class="list-group list-group-flush">
+		                        <a href="/board/qna" class="list-group-item list-group-item-action">QnA</a>
+		                        <a href="/board/notice" class="list-group-item list-group-item-action">공지사항</a>
+		                        <a href="/admin/event" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
+		                   </div>
+		               </div>
+		               
 		                    </aside>
 		             <!-- 사이드바 끝 -->
 	

@@ -420,9 +420,9 @@
 			                        
 			                        <div class="card-header bg-primary text-white">고객 센터</div>
 					                    <div class="list-group list-group-flush">
-					                        <a href="/board/QnA" class="list-group-item list-group-item-action">QnA</a>
-					                        <a href="/board/Notice" class="list-group-item list-group-item-action">공지사항</a>
-					                        <a href="/board/Notice" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
+					                        <a href="/board/qna" class="list-group-item list-group-item-action">QnA</a>
+					                        <a href="/board/notice"class="list-group-item list-group-item-action">공지사항</a>
+					                        <a href="/admin/event" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
 					                   </div>
 					                 
 			                     </div>
