@@ -81,30 +81,30 @@ function fn_list(curPage)
 
 //등록버튼 클릭 시
 $(document).ready(function(){
-	
-	var rcmChk = $("#rcmCount").val();
-	var bookChk = $("#bookMark").val();
-	
-	if(rcmChk == 1)
-	{
-		 document.getElementById("btnRecipeRcm").setAttribute("class", "bi bi-hand-thumbs-up-fill");
-	}
-	else
-	{
-		document.getElementById("btnRecipeRcm").setAttribute("class", "bi bi-hand-thumbs-up");
-	}
-	
-	if (bookChk == 1)
-	{
-		 document.getElementById("btnRecipeBookMark").setAttribute("class", "bi bi-heart-fill");
-	}
-	else
-	{
-		document.getElementById("btnRecipeBookMark").setAttribute("class", "bi bi-suit-heart");
-	}
+   
+   var rcmChk = $("#rcmCount").val();
+   var bookChk = $("#bookMark").val();
+   
+   if(rcmChk == 1)
+   {
+       document.getElementById("btnRecipeRcm").setAttribute("class", "bi bi-hand-thumbs-up-fill");
+   }
+   else
+   {
+      document.getElementById("btnRecipeRcm").setAttribute("class", "bi bi-hand-thumbs-up");
+   }
+   
+   if (bookChk == 1)
+   {
+       document.getElementById("btnRecipeBookMark").setAttribute("class", "bi bi-heart-fill");
+   }
+   else
+   {
+      document.getElementById("btnRecipeBookMark").setAttribute("class", "bi bi-suit-heart");
+   }
 
-	
-	
+   
+   
    $("#btnRecipeReply").on("click", function() {
 
       if($.trim($("#replyContent").val()).length <= 0)
@@ -200,9 +200,9 @@ $(document).ready(function(){
             
             else if(response.code == 401)
             {
-            	alert("추천을 취소하셨습니다.");
-            	//아이콘 변경
-            	document.getElementById("btnRecipeRcm").setAttribute("class", "bi bi-hand-thumbs-up");
+               alert("추천을 취소하셨습니다.");
+               //아이콘 변경
+               document.getElementById("btnRecipeRcm").setAttribute("class", "bi bi-hand-thumbs-up");
             }
             else
             {
@@ -255,9 +255,9 @@ $(document).ready(function(){
             
             else if(response.code == 401)
             {
-            	alert("찜하기를 취소하셨습니다.");
-            	//아이콘 변경
-            	document.getElementById("btnRecipeBookMark").setAttribute("class", "bi bi-suit-heart");
+               alert("찜하기를 취소하셨습니다.");
+               //아이콘 변경
+               document.getElementById("btnRecipeBookMark").setAttribute("class", "bi bi-suit-heart");
             }
             else
             {
@@ -280,34 +280,34 @@ $(document).ready(function(){
 //계량법 안내 클릭 시
 function infomationView() 
 {
-     var imgWindow = window.open("", "ImageWindow", "width=580,height=700"); 		// 새 창 열기
+     var imgWindow = window.open("", "ImageWindow", "width=580,height=700");       // 새 창 열기
      var img = document.createElement("img");
      img.src = "/resources/img/weighing.jpg";
-     imgWindow.document.body.appendChild(img); 		// 새 창에 img 추가
+     imgWindow.document.body.appendChild(img);       // 새 창에 img 추가
 }
 
 //url복사 버튼 클릭 시
 function urlCopy()
 {
-	prompt("아래 URL을 복사(Ctrl+C)하여 원하는 곳에 붙여넣기(Ctrl+V)하세요.", window.location.href);
+   prompt("아래 URL을 복사(Ctrl+C)하여 원하는 곳에 붙여넣기(Ctrl+V)하세요.", window.location.href);
 }
 
 //카카오톡 버튼 클릭 시
 function kakaoLogin()
 {
-	 var imgWindow = window.open("https://accounts.kakao.com");	
+    var imgWindow = window.open("https://accounts.kakao.com");   
 }
 
 //페이스북 버튼 클릭 시
 function facebookLogin()
 {
-	var imgWindow = window.open("https://www.facebook.com");	
+   var imgWindow = window.open("https://www.facebook.com");   
 }
 
 //트위터 버튼 클릭 시
 function twitterLogin()
 {
-	var imgWindow = window.open("https://twitter.com");
+   var imgWindow = window.open("https://twitter.com");
 }
 
 </script>
@@ -348,247 +348,270 @@ function twitterLogin()
               
                   <!-- 흰색 배경안에서 정렬 해줄 작은 영역 시작 -->
                   <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정가능. -->
-					<div class="content section_delete">
+               <div class="content section_delete">
                      
 
        
-			       <!-- 테스트 시작-->
-			<div>
-			  <div class="wow fadeInUp" data-wow-delay="0.1s">
-			     <div class="team-item text-center rounded overflow-hidden">
-			     
-			      <!-- 내가 가진 재료로 만들 수 있는 레시피 리스트들 넣어줄 영역 -->
-			        <div class="container-xxl py-5"> 
-			            <div class="container">
-			                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			                <br>
-			              
-			                  <!-- 흰색 배경안에서 정렬 해줄 작은 영역 시작 -->
-			                  <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정가능. -->
-								<div class="content section_delete">
-								
-								
-								<!-- 본문 시작 -->
-								
-								<!-- 맨위 레시피 이름, 추천, 인분, 시간 시작-->
-								 <div class="container text-center my-1 pt-1 pb-1">      
-							       <img id="main_thumbs" src="${recipeInfo.recipeImage}" width="400" height="300" alt="main thumb" class="portrait">
-							       </br></br>
-							       
-							       
-								   <div>
-								   	<br>
-								   <!-- 	<button id="btnRecipeBookMark">찜하기</button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-	  								<button id="btnRecipeRcm">추천</button> -->
-									  <button id="btnRecipeBookMark"  class="" style="border: 1px solid gray; background-color: #FF6666; color: white; width: 110px; height: 40px;">찜하기</button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									  <button id="btnRecipeRcm"  class="" style="border: 1px solid gray; background-color: #FF9966; color: white; width: 80px; height: 40px;">추천</button>
-									</div>
-							      </br></br>
-							      
-							      
-							      
-							      <h3>${recipeInfo.recipeName}</h3>
-							      <div class="view2_summary_in" id="recipeIntro">${recipeInfo.recipeIntro}<br>
-							        </div>        
-							                <div class="view2_summary_info">
-							                <span class="view2_summary_info1">${recipeInfo.recipeQnt}</span>
-							                <span class="view2_summary_info2">${recipeInfo.recipeTime}</span>
-							                </div>
-							                
-							             <div class="modal-body">
-							                <div class="btn_list">                          
-							                  <a href="javascript:void(0)" onclick="urlCopy()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_url_copy.gif" data-toggle="tooltip" title="" data-original-title="레시피 주소복사"></a>
-							                  <a id="kakao-link-btn" onclick="kakaoLogin()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_sns_k.png" data-toggle="tooltip" title="" data-original-title="카카오톡"></a>
-							                  <a href="javascript:void(0)" onclick="facebookLogin()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_sns_f.png" data-toggle="tooltip" title="" data-original-title="페이스북"></a>
-							                  <a href="javascript:void(0)" onclick="twitterLogin()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_sns_t.png" data-toggle="tooltip" title="" data-original-title="트위터"></a>                           
-							                </div>
-							             </div>
-							        </div>
-							        <br>
-							        <br>
-							        <!-- 맨위 레시피 이름, 추천, 인분, 시간 끝-->
-							        
-							        
-					        <!-- 주재료/ 부재료 시작-->
-					        <div>
-							  <div class="wow fadeInUp" data-wow-delay="0.1s">
-							     <div class="team-item text-center rounded overflow-hidden">
-							        
-							        <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정가능. -->
-										<div class="content section_delete">
-										<br>
-											
-							            
-							            <div class="blank_bottom"></div><!-- 회색 구분선 -->
-							            <br>
-							            <div class="best_tit">
-							                <b>재료</b><span>Ingredients</span>
-							              <div class="best_tit_rmn">
-							                <button id="btnMeasureModal" type="button" class="btn btn-default" onclick="infomationView()">계량법 안내</button>
-							              </div>
-							            </div>
-							            
-							            <div class="blank_bottom"></div><!-- 회색 구분선 -->
-							            <br>
-							            <br>
-							            
-							            
-							            <div class="ready_ingre3" id="divConfirmedMaterialArea">
-							               <ul>
-						                    <b class="ready_ingre3_tt">[주재료]</b>
-						                 
-						                 
-							                 <!-- 레시피 코드가 있을 경우 -->
-							                <c:if test ="${!recipeIrdnt.recipeCode}">   
-							                    <c:forEach var = "recipeIrdnt" items = "${irdntList}" varStatus = "status">                                            
-							                          <li>${recipeIrdnt.irdntName}        
-							                           <span class="ingre_unit">${recipeIrdnt.irdntAmount}</span>
-							                        </li>
-							                          
-							                     </c:forEach> 
-							                 </c:if>                                                                                  
-							                  </ul>
-							                  
-							                 <ul>
-							                  <b class="ready_ingre3_tt">[부재료]</b>
-							                  <!-- 레시피 코드가 있을 경우 -->
-								                <c:if test ="${!recipeIrdnt2.recipeCode}">   
-								                   <c:forEach var = "recipeIrdnt2" items = "${irdntList2}" varStatus = "status">                                                        
-								                      <li>${recipeIrdnt2.irdntName}                                                      
-								                      <span class="ingre_unit">${recipeIrdnt2.irdntAmount}</span>
-								                    </li>
-								                  </c:forEach>
-								            	</c:if>
-							                 </ul>
-							               
-										</div>
-									</div>
-									</div>
-									</div>
-							        <!-- 주재료/ 부재료 끝-->
-									        
-							        <br>
-							        <br>
-							        
-							        
-							<!-- 조리과정 본문 시작 -->
-							 <div>
-							  <div class="wow fadeInUp" data-wow-delay="0.1s">
-							     <div class="team-item text-center rounded overflow-hidden">
-							     <br>
-							     <div class="best_tit">
-							      <br>
-							        <h3>조리순서 <span>Steps</span></h3>               
-							     </div>
-							      <c:forEach var = "recipeCooking" items = "${cookingList}" varStatus = "status">            
-										<!-- <div id="stepDiv1" class="view_step_cont media step1">${recipeCooking.cookingOrder}<div id="stepdescr1" class="media-body">${recipeCooking.cookingExplan}</div> -->
-										<!-- <div id="stepimg1" class="media-right"><img src="${recipeCooking.cookingImage}"></div></div> -->
-										<br>
-										<br>
-										<div style="text-align: left; color: orange; font-size:24px; font-weight: bold;">&nbsp;&nbsp;&nbsp;${recipeCooking.cookingOrder}</div>
-										<br>
-										<div><span style="text-align: left; font-size:19px;">${recipeCooking.cookingExplan}</span></div>
-										<br>
-										<div><img width="350" height="250" src="${recipeCooking.cookingImage}"></div>
-									</c:forEach>
-							      <br>
-							      <br>
-							     
-							     </div>
-							  </div>
-							 </div>
-							<!-- 조리과정 본문 끝 -->
-							<!-- 조리과정 본문 하얀 배경 끝 -->
-							        
-							        <!-- 댓글은 바깥으로 빼면 어떻게 되나?? -->
-							        <!-- 댓글 시작 -->
-							<div>
-							  <div class="wow fadeInUp" data-wow-delay="0.1s">
-							        
-								     <form name="replyForm" id="replyForm" method="post" enctype="multipart/form-data">
-								      <div class="view_reply">
-								        <div class="reply_tit" style="text-align: left;">댓글 <span id="recipeReplyCount">106</span></div>
-											<c:forEach var = "recipeReply" items = "${replyList}" varStatus = "status">      
-											 <div id="recipeCommentList_1">    
-											   <div class="media reply_list">
-											         
-											         
-											        <div class="media-left">
-											        <img id="userProfile" class="media-object" src="/resources/img/testimonial-4.jpg" data-holder-rendered="true">
-											        <div class="media-body">
-											        <b id="userNickname" class="info_name_f">${recipeReply.userNickname}</b>
-											        
-											        <c:if test="${boardMe eq 'Y'}">   
-											        <button type="button" id="btnRecipeReplyDelete" class="btn btn-primary" title="삭제">삭제</button>
-											        </c:if>
-											        
-											         <h4 id="regDate"class="media-heading">${recipeReply.regDate}</h4>
-											        <h6 id="recipeReplyContent">${recipeReply.replyContent}</h6>
-											        </div>
-											        </div>
-											            
-											    </div>
-											 </div> 
-											</c:forEach>  
-										</div>
-									
-									
-								      <div class="reply_write">
-								          <textarea id="replyContent" name="replyContent" class="" placeholder="댓글을 남겨보세요!" style="height:100px; width:600px; resize:none;"></textarea>
-								             <input type="hidden" id="recipeCode" name="recipeCode" value="${recipeInfo.recipeCode}" /> 
-								      </div>
-								      
-								 </form>
-								     <!-- 댓글 종료 -->
-								       
-								       
-								       
-								   <tfoot>
-								      <tr>
-								        <td colspan="5"></td>
-								      </tr>
-								   </tfoot>
-								       
-								    <nav>
-								      <ul class="pagination justify-content-center">
-											<c:if test = "${!empty paging}">
-											   <c:if test = "${paging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
-											     <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전</a></li>
-											   </c:if>
-											   
-											   <c:forEach var = "i" begin = "${paging.startPage}" end = "${paging.endPage}"> <!-- for문 -->
-											      <c:choose>
-											         <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
-											         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
-											            </c:when>
-											            <c:otherwise>
-											         <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
-											            </c:otherwise>   
-											        </c:choose>
-											   </c:forEach>
-											   <c:if test = "${paging.nextBlockPage gt 0}"> <!-- gt 0보다 크냐 -->
-											         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음</a></li>
-											   </c:if>
-											</c:if>
-								      </ul>
-								   </nav>
-								       
-								          <span class="input-group-btn">
-								          <button type="button" id="btnRecipeReply" class="btn-primary" title="등록">등록</button>
-								          </span>
-								        </div>
-								      
-								      </div>
-								    </div>
-								
-								       </div>
-								       
-				   </div>
-				 </div>  
-							        <!-- 댓글은 바깥으로 빼면 어떻게 되나?? -->
-								<!-- 본문 시작 -->
-								
-					
+                <!-- 테스트 시작-->
+         <div>
+           <div class="wow fadeInUp" data-wow-delay="0.1s">
+              <div class="team-item text-center rounded overflow-hidden">
+              
+               <!-- 내가 가진 재료로 만들 수 있는 레시피 리스트들 넣어줄 영역 -->
+                 <div class="container-xxl py-5"> 
+                     <div class="container">
+                         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                         <br>
+                       
+                           <!-- 흰색 배경안에서 정렬 해줄 작은 영역 시작 -->
+                           <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정가능. -->
+                        <div class="content section_delete">
+                        
+                        
+                        <!-- 본문 시작 -->
+                        
+                        <!-- 맨위 레시피 이름, 추천, 인분, 시간 시작-->
+                         <div class="container text-center my-1 pt-1 pb-1">      
+                            <img id="main_thumbs" src="${recipeInfo.recipeImage}" width="400" height="300" alt="main thumb" class="portrait">
+                            </br></br>
+                            
+                            
+                           <div>
+                              <br>
+                           <!--    <button id="btnRecipeBookMark">찜하기</button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                             <button id="btnRecipeRcm">추천</button> -->
+                             <button id="btnRecipeBookMark"  class="" style="border: 1px solid gray; background-color: #FF6666; color: white; width: 110px; height: 40px;">찜하기</button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                             <button id="btnRecipeRcm"  class="" style="border: 1px solid gray; background-color: #FF9966; color: white; width: 80px; height: 40px;">추천</button>
+                           
+                           </div>
+                           </br></br>
+                           
+                           
+                           
+                           <h3>${recipeInfo.recipeName}</h3>
+                           <div class="view2_summary_in" id="recipeIntro">${recipeInfo.recipeIntro}<br>
+                             </div>        
+                                     <div class="view2_summary_info">
+                                     <span class="view2_summary_info1">${recipeInfo.recipeQnt}</span>
+                                     <span class="view2_summary_info2">${recipeInfo.recipeTime}</span>
+                                     </div>
+                                     
+                                      <div class="view2_summary_info">
+                                     <span class="view2_summary_info1">${recipeInfo.bbsReadCnt}</span>
+                                     </div>
+                                   
+                                  <div class="modal-body">
+                   
+                                     <div class="btn_list">                          
+                                       <a href="javascript:void(0)" onclick="urlCopy()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_url_copy.gif" data-toggle="tooltip" title="" data-original-title="레시피 주소복사"></a>
+                                       <a id="kakao-link-btn" onclick="kakaoLogin()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_sns_k.png" data-toggle="tooltip" title="" data-original-title="카카오톡"></a>
+                                       <a href="javascript:void(0)" onclick="facebookLogin()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_sns_f.png" data-toggle="tooltip" title="" data-original-title="페이스북"></a>
+                                       <a href="javascript:void(0)" onclick="twitterLogin()"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_sns_t.png" data-toggle="tooltip" title="" data-original-title="트위터"></a>                           
+                                    
+                                     </div>
+                                  </div>
+                             </div>
+                             <br>
+                             <br>
+                             <!-- 맨위 레시피 이름, 추천, 인분, 시간 끝-->
+                             
+                             
+                       <!-- 주재료/ 부재료 시작-->
+                       <div>
+                       <div class="wow fadeInUp" data-wow-delay="0.1s">
+                          <div class="team-item text-center rounded overflow-hidden">
+                             
+                             <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정가능. -->
+                              <div class="content section_delete">
+                              <br>
+                                 
+                                 
+                                 <div class="blank_bottom"></div><!-- 회색 구분선 -->
+                                 <br>
+                                 <div class="best_tit">
+                                     <b>재료</b><span>Ingredients</span>
+                                   <div class="best_tit_rmn">
+                                     <button id="btnMeasureModal" type="button" class="btn btn-default" onclick="infomationView()">계량법 안내</button>
+                                   </div>
+                                 </div>
+                                 
+                                 <div class="blank_bottom"></div><!-- 회색 구분선 -->
+                                 <br>
+                                 <br>
+                                 
+                                                            
+                                 
+                                 
+                                 <div class="ready_ingre3" id="divConfirmedMaterialArea">
+                                    <ul>
+                                      <b class="ready_ingre3_tt">[주재료]</b>
+                                   
+                                   
+                                      <!-- 레시피 코드가 있을 경우 -->
+                                     <c:if test ="${!recipeIrdnt.recipeCode}">   
+                                         <c:forEach var = "recipeIrdnt" items = "${irdntList}" varStatus = "status">                                            
+                                               <li>${recipeIrdnt.irdntName}        
+                                                <span class="ingre_unit">${recipeIrdnt.irdntAmount}</span>
+                                             </li>
+                                               
+                                          </c:forEach> 
+                                      </c:if>                                                                                  
+                                       </ul>
+                                       
+                                      <ul>
+                                       <b class="ready_ingre3_tt">[부재료]</b>
+                                       <!-- 레시피 코드가 있을 경우 -->
+                                        <c:if test ="${!recipeIrdnt2.recipeCode}">   
+                                           <c:forEach var = "recipeIrdnt2" items = "${irdntList2}" varStatus = "status">                                                        
+                                              <li>${recipeIrdnt2.irdntName}                                                      
+                                              <span class="ingre_unit">${recipeIrdnt2.irdntAmount}</span>
+                                            </li>
+                                          </c:forEach>
+                                       </c:if>
+                                      </ul>
+                                    
+                              </div>
+                           </div>
+                           </div>
+                           </div>
+                             <!-- 주재료/ 부재료 끝-->
+                                   
+                             <br>
+                             <br>
+                             
+                             
+                     <!-- 조리과정 본문 시작 -->
+                      <div>
+                       <div class="wow fadeInUp" data-wow-delay="0.1s">
+                          <div class="team-item text-center rounded overflow-hidden">
+                          <br>
+                          <div class="best_tit">
+                           <br>
+                             <h3>조리순서 <span>Steps</span></h3>               
+                          </div>
+                           <c:forEach var = "recipeCooking" items = "${cookingList}" varStatus = "status">            
+                              <!-- <div id="stepDiv1" class="view_step_cont media step1">${recipeCooking.cookingOrder}<div id="stepdescr1" class="media-body">${recipeCooking.cookingExplan}</div> -->
+                              <!-- <div id="stepimg1" class="media-right"><img src="${recipeCooking.cookingImage}"></div></div> -->
+                              <br>
+                              <br>
+                              <div style="text-align: left; color: orange; font-size:24px; font-weight: bold;">&nbsp;&nbsp;&nbsp;${recipeCooking.cookingOrder}</div>
+                              <br>
+                              <div><span style="text-align: left; font-size:19px;">${recipeCooking.cookingExplan}</span></div>
+                              <br>
+                              <div><img width="350" height="250" src="${recipeCooking.cookingImage}"></div>
+                           </c:forEach>
+                           <br>
+                           <br>
+                          
+                          </div>
+                       </div>
+                      </div>
+                     <!-- 조리과정 본문 끝 -->
+                     <!-- 조리과정 본문 하얀 배경 끝 -->
+                             
+                             <!-- 댓글은 바깥으로 빼면 어떻게 되나?? -->
+                             <!-- 댓글 시작 -->
+                     <div>
+                       <div class="wow fadeInUp" data-wow-delay="0.1s">
+                             
+                             <form name="replyForm" id="replyForm" method="post" enctype="multipart/form-data">
+                              <div class="view_reply">
+                              <br>
+                              <br>
+                                <div class="reply_tit" style="text-align: left;">댓글 <span id="recipeReplyCount">${totalCount}</span></div>
+                                 <c:forEach var = "recipeReply" items = "${replyList}" varStatus = "status">      
+                                  <div id="recipeCommentList_1">    
+                                    <div class="media reply_list">
+                                          
+                                          
+                                         <div class="media-left" style="text-align: left;">
+                                         
+                                                         <c:if test="${recipeReply.fileExt eq ''}">
+                                              <img src = "/resources/img/pro.jpg" class = "profile-photo "  width="200", height="200">
+                                             </c:if>   
+                                             <c:if test="${recipeReply.fileExt ne ''}">
+                                                <img src = "/resources/upload/${recipeReply.userId}.${recipeReply.fileExt}" class = "profile-photo"  width="200", height="200">
+                                             </c:if>
+                                             
+                                          <!-- 이미지 옆 닉네임 나오게하기 -->
+                                          <span>&nbsp; ${user.userNickname}</span>
+                                          <!-- 이미지 옆 닉네임 나오게하기 -->
+                                             
+            
+                                         
+                                         <c:if test="${boardMe eq 'Y'}">   
+                                         <button type="button" id="btnRecipeReplyDelete" class="btn btn-primary" title="삭제">삭제</button>
+                                         </c:if>
+                                         <br>
+                                         <br>
+                                          <h4 id="regDate"class="media-heading">${recipeReply.regDate}</h4>
+                                         <h6 id="recipeReplyContent">${recipeReply.replyContent}</h6>
+                                         </div>
+                                         </div>
+                                             
+                                     </div>
+                                     </c:forEach>
+                                  </div> 
+                                   
+                              </div>
+                           
+                           
+                              <div class="reply_write">
+                                  <textarea id="replyContent" name="replyContent" class="" placeholder="댓글을 남겨보세요!" style="height:100px; width:600px; resize:none;"></textarea>
+                                     <input type="hidden" id="recipeCode" name="recipeCode" value="${recipeInfo.recipeCode}" /> 
+                              </div>
+                              
+                         </form>
+                             <!-- 댓글 종료 -->
+                               
+                               
+                               
+                           <tfoot>
+                              <tr>
+                                <td colspan="5"></td>
+                              </tr>
+                           </tfoot>
+                               
+                            <nav>
+                              <ul class="pagination justify-content-center">
+                                 <c:if test = "${!empty paging}">
+                                    <c:if test = "${paging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
+                                      <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전</a></li>
+                                    </c:if>
+                                    
+                                    <c:forEach var = "i" begin = "${paging.startPage}" end = "${paging.endPage}"> <!-- for문 -->
+                                       <c:choose>
+                                          <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
+                                          <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+                                             </c:when>
+                                             <c:otherwise>
+                                          <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+                                             </c:otherwise>   
+                                         </c:choose>
+                                    </c:forEach>
+                                    <c:if test = "${paging.nextBlockPage gt 0}"> <!-- gt 0보다 크냐 -->
+                                          <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음</a></li>
+                                    </c:if>
+                                 </c:if>
+                              </ul>
+                           </nav>
+                               
+                                  <span class="input-group-btn">
+                                  <button type="button" id="btnRecipeReply" class="btn-primary" title="등록">등록</button>
+                                  </span>
+                                </div>
+                              
+                              </div>
+                            </div>
+                        
+                               </div>
+                               
+               </div>
+             </div>  
+                             <!-- 댓글은 바깥으로 빼면 어떻게 되나?? -->
+                        <!-- 본문 시작 -->
+                        
+               
                  </div>
              </div>
           </div>

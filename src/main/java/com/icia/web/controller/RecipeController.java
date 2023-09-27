@@ -175,6 +175,9 @@ public class RecipeController
          //쿠키값
          String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
          
+         //댓글에 사용자 닉네임 보여주기 위한 use객체
+         User user = userService.userSelect(cookieUserId);
+         
          //레시피 코드(INFO)
          int recipeCode = HttpUtil.get(request, "recipeCode", (int)0);
          
@@ -274,6 +277,7 @@ public class RecipeController
                 model.addAttribute("totalCount",totalCount);
                 model.addAttribute("recipeBookMarkCount", recipeBookMarkCount);
                 model.addAttribute("rcmCount",rcmCount);
+                model.addAttribute("user", user);
                 
                 return "/recipe/recipeView";
        }
