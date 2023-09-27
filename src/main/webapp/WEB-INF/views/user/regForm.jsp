@@ -39,8 +39,17 @@
     <!-- Template Stylesheet -->
     <link href="/resources/css/style.css" rel="stylesheet">
    
-   
-   
+<style>
+.spacer {
+    display: inline-block; /* 인라인 요소로 배치되도록 설정 */
+    width: 30px; /* 원하는 간격 크기로 조정 */
+    height: 1px; /* 투명한 줄을 만들기 위해 높이를 1px로 설정 */
+    background-color: transparent; /* 배경색을 투명하게 설정 */
+}
+</style>
+
+
+
    
 <script type="text/javascript">
    $(document).ready(function(){
@@ -213,9 +222,6 @@
             //계좌번호, 나이 정규식 -> 0-9까지 숫자만 입력가능
            var NumCheck = /^[0-9]+$/;
             
-            //전화번호 정규식 -> 가운데 자리는 3~4자리 0~9숫자,  마지막 자리는 4자리의 0~9숫자
-            ///^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/;  핸드폰 앞자리는 010 으로 통합되었기 때문에 앞자리에는 010만 올수 있게 표현식을 바꿨음
-            var phoneRule = /^(01[0]{1})[0-9]{3,4}[0-9]{4}$/;
            
             if(checkId !=1)
            	{
@@ -311,66 +317,7 @@
             
             
             
-            //전화번호
-            if($.trim($("#userPhoneNumber").val()).length <=0 )
-            {
-               alert("전화번호를 입력하세요.");
-               $("#userPhoneNumber").val("");
-               $("#userPhoneNumber").focus();
-               return;
-            }
-            
-            if(emptCheck.test($("#userPhoneNumber").val()))  
-            {
-               alert("전화번호는 공백을 포함할 수 없습니다.");
-               $("#userPhoneNumber").focus();
-               return;
-            }
-            
-            if(!phoneRule.test($("#userPhoneNumber").val())) 
-            {
-               alert("전화번호는 0-9까지의 숫자로 000-000(0)-0000처럼 총10~11자리의 숫자만 입력 가능합니다.");
-               $("#userPhoneNumber").focus();
-               return;
-            }
-            
-            
-            if(($("#userPhoneNumber").val()).length > 11)
-            {
-            	alert("전화번호 형식은 숫자만 입력으로 11자리까지 입니다.");
-            	$("#userPhoneNumber").focus();
-                return;
-            }
-            
-            
-            
-            
-            	
-            //계좌
-            if($.trim($("#userAccount").val()).length <=0 )
-            {
-               alert("계좌번호를 입력하세요.");
-               $("#userAccount").val("");
-               $("#userAccount").focus();
-               return;
-            }
-            
-            if(emptCheck.test($("#userAccount").val()))  
-            {
-               alert("계좌번호는 공백을 포함할 수 없습니다.");
-               $("#userAccount").focus();
-               return;
-            }
-            
-            
-            if(!NumCheck.test($("#userAccount").val()))  
-            {
-               alert("계좌번호는 숫자만 입력가능합니다.");
-               $("#userAccount").focus();
-               return;
-            }
-            
-            
+           
             //사용자 이름
             if($.trim($("#userName").val()).length <= 0) //사용자 이름의 길이는 상관없음 한글자라도 입력만 하면 됨
             {
@@ -497,8 +444,6 @@ function fn_userReg()
             userAddress:$("#userAddress").val(),
             userAge:$("#userAge").val(),
             userGender:$("#userGender").val(),
-            userPhoneNumber:$("#userPhoneNumber").val(),
-            userAccount:$("#userAccount").val(),
             userName:$("#userName").val(),
             userNickname:$("#userNickname").val()
             
@@ -606,16 +551,43 @@ function fn_validateEmail(value)
                         <form class="d-flex justify-content-center align-items-center">
                        
                            <div class="row g-2 d-flex justify-content-center" >
+                           
 	                            <div class="row g-2 d-flex justify-content-center" >
-	                                <div class="col-8 text-center">
+	                                <div class="col-7 text-center">
 	                                    <div class="form-floating">
 	                                        <input type="text" class="form-control" id="userId" placeholder="Your ID">
-	                                        <button type="button" class="btn btn-primary py-2 px-4" id="btnIdCheck"name="btnIdCheck">중복체크</button>
 	                                        <label for="userId">아이디를 입력하세요</label>
 	                                    </div>
 	                                </div>
-	                              </div>
+	                                
+	                                <div class="col-1 text-left form-floating">
+	                                	<div>
+	                                        <button type="button" class="btn btn-primary py-2 px-4" id="btnIdCheck"name="btnIdCheck" style="width: 90px; height: 58px;">중복체크</button>
+	                                    </div>
+	                                </div>
+	                             </div>
                               
+                                <!-- 테스트 하기 위한 예제 -->
+                                 <div class="row g-2  d-flex justify-content-center" >
+				                      <div class="col-4">
+				                          <div class="form-floating">
+				                              <input type="text" class="form-control" id="userName" placeholder="Your Name">
+				                              <label for="userName">이름을 입력하세요</label>
+				                          </div>
+				                      </div>
+				                      
+				                  
+				                      <div class="col-4">
+				                          <div class="form-floating">
+				                              <input type="text" class="form-control" id="userNickname" placeholder="Your NickName">
+				                              <label for="userNickname">닉네임을 입력하세요</label>
+				                          </div>
+				                      </div>
+				                 </div> 
+                                <!-- 예제 -->
+                                
+                                
+                                
                                 
                              <div class="row g-2  d-flex justify-content-center" >
                                 <div class="col-8 text-center">
@@ -636,30 +608,39 @@ function fn_validateEmail(value)
                                 </div>
                              </div>
                              
-                             <div class="row g-2  d-flex justify-content-center" >
-	                      <div class="col-4">
-							<input type="text" class="form-control" name="userEmail1" id="userEmail1" 
-							placeholder="이메일" style="width:120%; text-align:center;" >
-							<select class="form-control" name="userEmail2" id="userEmail2" style = "width :120%;text-align:center;">
-							<option>@naver.com</option>
-							<option>@daum.net</option>
-							<option>@gmail.com</option>
-							<option>@hanmail.com</option>
-							 <option>@yahoo.co.kr</option>
-							</select>
+                             
+                        <div class="row g-2 d-flex justify-content-center" >
+	                         <div class="col-8 text-center row g-2 d-flex ">
+		                       <div class="col-5">
+								 <input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일" style=" height: 50px;" text-align:center;" >	
+							   </div>
+							   <div class="col-4" style="text-align: left;">
+							     <select class="form-control" name="userEmail2" id="userEmail2" style="height: 50px;" text-align:center;">
+									<option>@naver.com</option>
+									<option>@daum.net</option>
+									<option>@gmail.com</option>
+									<option>@hanmail.com</option>
+									<option>@yahoo.co.kr</option>
+								 </select>
+							   </div>
+							   
+							   <div class="col-3">
+									<button type="button"class="btn btn-primary py-2 px-4" style="width: 150px;  height: 50px;" id="mail-Check-Btn" name="mail-Check-Btn">이메일 인증</button>
+								
+							   </div>
 							</div>
-							<div class="col-4">
-							<button type="button"class="btn btn-primary py-2 px-4" id="mail-Check-Btn"name="mail-Check-Btn">이메일 인증</button>
-							</br></br>
-							 </div>
 						</div>
-						<div class="row g-2  d-flex justify-content-center" >
-	                      <div class="col-4">
-							<input class="form-control"style="width:480px;height:35px;" id= "emailCheck" name = "emailCheck" placeholder="인증번호 6자리를 입력해주세요!"  maxlength="6">
+						
+						
+						<div class="row g-2 d-flex justify-content-center">
+	                      <div class="col-6">
+							<input class="form-control" style=" height:45px;" id= "emailCheck" name = "emailCheck" placeholder="인증번호 6자리를 입력해주세요!"  maxlength="6">
 							</div>
-							<div class="col-4">
-							<button type="button" class="btn btn-primary py-2 px-4" id="mail-Check-Btn1"name="mail-Check-Btn1">인증번호 확인</button>
+							<div class="col-2 justify-content-end">
+							<div><span class="spacer"></span></div>
+							<button type="button" style="height:45px;" class="btn btn-primary py-2 px-4 justify-content-end" id="mail-Check-Btn1"name="mail-Check-Btn1">인증번호 확인</button>
 							</div>
+						</div>
                               
                                 
                                 
@@ -672,44 +653,8 @@ function fn_validateEmail(value)
                                 </div>
                             </div>
                            
-                             
-                            
-                          <!--       <div class="col-4">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="userAge" placeholder="Your userAge">
-                                        <label for="userAge">나이를 입력하세요</label>
-                                    </div>
-                                </div>
-                           -->    
-                                
-                                
                            
-                               
-                            
-	                            
-	                            <div class="row g-2   d-flex justify-content-center" >
-	                                <div class="col-8">
-	                                    <div class="form-floating">
-	                                        <input type="text" class="form-control" id="userPhoneNumber" placeholder="Your Phone Number">
-	                                        <label for="userPhoneNumber">전화번호를 입력하세요</label>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            
-	                            
-	                            
-	                             <div class="row g-2   d-flex justify-content-center" >
-	                                <div class="col-8">
-	                                    <div class="form-floating">
-	                                        <input type="text" class="form-control" id="userAccount" placeholder="Your Account">
-	                                        <label for="userAccount">계좌번호를 입력하세요</label>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            
-	                            
-	                            
-	                             
+                              
 	               <div class="row g-2  d-flex justify-content-center" >
 	                      <div class="col-4">
 	                          <div class="form-floating">
