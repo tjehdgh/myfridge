@@ -37,91 +37,91 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	   $("#ansTitle").focus();
-	   
-	   $("#btnUpdate2").on("click", function() {
-	      $("#btnUpdate2").prop("disabled", false);      //버튼 비활성화
-	      
-	      if($.trim($("#ansTitle").val()).length <= 0)
-	      {
-	            alert("제목을 입력하세요.");
-	            $("#ansTitle").val("");
-	            $("#ansTitle").focus();
-	            return;
-	      }
-	      
-	      if($.trim($("#ansContent").val()).length <= 0)
-	      {
-	            alert("내용을 입력하세요.");
-	            $("#ansContent").val("");
-	            $("#ansContent").focus();
-	            return;
-	      }
-	      
-	      var form = $("#adminQnaUpdateForm")[0];
-	      var formData = new FormData(form);
-	      
-	      $.ajax({
-	         type:"POST",
-	         enctype:"multipart/form-data",
-	         url:"/admin/adminQnaUpdateProc",
-	         data:formData,
-	         processData:false,
-	         contentType:false,
-	         cache:false,
-	         beforeSend:function(xhr)
-	         {
-	            xhr.setRequestHeader("AJAX", "true");
-	         },
-	         success:function(response)
-	         {
-	            if(response.code == 0)
-	            {
-	               alert("게시물이 수정 되었습니다.");
-	               location.href = "/admin/adminQna";
-	               /*
-	               document.bbsForm.action = "/board/list";
-	               document.bbsForm.submit();
-	               */
-	            }
-	            else if(response.code == 400)
-	            {
-	               alert("파라미터 값이 올바르지 않습니다.");
-	               $("#btnUpdate2").prop("disabled", false);   //버튼 활성화
-	            }
-	            else if(response.code == 403)
-	            {
-	               alert("본인 게시물이 아닙니다.");
-	               $("#btnUpdat2").prop("disabled", false);      //버튼 활성화
-	            }
-	            else if(response.code == 404)
-	            {
-	               alert("게시물을 찾을수 없습니다.")
-	               location.href = "/admin/adminQna";
-	            }
-	            else
-	            {
-	               alert("게시물 수정 중 오류가 발생하였습니다.");
-	               $("#btnUpdate2").prop("disabled", false);   //버튼 활성화
-	            }
-	            
-	         },
-	         error:function(error)
-	         {
-	            icia.common.error(error);
-	            alert("게시물 수정 중 오류가 발생하였습니다.");
-	            $("#btnUpdate2").prop("disabled", false);      //버튼 활성화
-	         }
-	      });
-	   });
-	   
-	   $("#btnList").on("click", function() {
-	      document.bbsForm.action = "/admin/adminQna";
-	      document.bbsForm.submit();
-	   });
+      $("#ansTitle").focus();
+      
+      $("#btnUpdate2").on("click", function() {
+         $("#btnUpdate2").prop("disabled", false);      //버튼 비활성화
+         
+         if($.trim($("#ansTitle").val()).length <= 0)
+         {
+               alert("제목을 입력하세요.");
+               $("#ansTitle").val("");
+               $("#ansTitle").focus();
+               return;
+         }
+         
+         if($.trim($("#ansContent").val()).length <= 0)
+         {
+               alert("내용을 입력하세요.");
+               $("#ansContent").val("");
+               $("#ansContent").focus();
+               return;
+         }
+         
+         var form = $("#adminQnaUpdateForm")[0];
+         var formData = new FormData(form);
+         
+         $.ajax({
+            type:"POST",
+            enctype:"multipart/form-data",
+            url:"/admin/adminQnaUpdateProc",
+            data:formData,
+            processData:false,
+            contentType:false,
+            cache:false,
+            beforeSend:function(xhr)
+            {
+               xhr.setRequestHeader("AJAX", "true");
+            },
+            success:function(response)
+            {
+               if(response.code == 0)
+               {
+                  alert("게시물이 수정 되었습니다.");
+                  location.href = "/admin/adminQna";
+                  /*
+                  document.bbsForm.action = "/board/list";
+                  document.bbsForm.submit();
+                  */
+               }
+               else if(response.code == 400)
+               {
+                  alert("파라미터 값이 올바르지 않습니다.");
+                  $("#btnUpdate2").prop("disabled", false);   //버튼 활성화
+               }
+               else if(response.code == 403)
+               {
+                  alert("본인 게시물이 아닙니다.");
+                  $("#btnUpdat2").prop("disabled", false);      //버튼 활성화
+               }
+               else if(response.code == 404)
+               {
+                  alert("게시물을 찾을수 없습니다.")
+                  location.href = "/admin/adminQna";
+               }
+               else
+               {
+                  alert("게시물 수정 중 오류가 발생하였습니다.");
+                  $("#btnUpdate2").prop("disabled", false);   //버튼 활성화
+               }
+               
+            },
+            error:function(error)
+            {
+               icia.common.error(error);
+               alert("게시물 수정 중 오류가 발생하였습니다.");
+               $("#btnUpdate2").prop("disabled", false);      //버튼 활성화
+            }
+         });
+      });
+      
+      $("#btnList").on("click", function() {
+         document.bbsForm.action = "/admin/adminQna";
+         document.bbsForm.submit();
+      });
 
 
-	});
+   });
 </script>   
 <script type="text/javascript" sc="/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/icia.common.js"></script>
@@ -162,7 +162,7 @@ $(document).ready(function() {
                         </li>
                       </ul>                    
                 </div>
-	<div class="container">
+   <div class="container">
    <h2>게시물 수정</h2>
    <form name="adminQnaUpdateForm" id="adminQnaUpdateForm" method="post" enctype="multipart/form-data">
       <input type="text" name="ansTitle" id="ansTitle" maxlength="100" style="ime-mode:active;" value="${qnaBoardAns.ansTitle}" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
@@ -176,8 +176,8 @@ $(document).ready(function() {
    
    <div class="form-group row">
       <div class="col-sm-12">
-         <button type="button" id="btnUpdate2" class="btn btn-primary" title="수정">수정</button>
-         <button type="button" id="btnList" class="btn btn-secondary" title="리스트">리스트</button>
+         <button type="button" id="btnUpdate2" class="btn" ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#66b913;height:20px;}</style><path d="M368.4 18.3L312.7 74.1 437.9 199.3l55.7-55.7c21.9-21.9 21.9-57.3 0-79.2L447.6 18.3c-21.9-21.9-57.3-21.9-79.2 0zM288 94.6l-9.2 2.8L134.7 140.6c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-3.8 11.3-1 23.9 7.3 32.4L164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L33.7 500.9c8.6 8.3 21.1 11.2 32.4 7.3l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 2.8-9.2L288 94.6z"/></svg></button>
+         <button type="button" id="btnList" class="btn" ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#19070B}</style><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg></button>
       </div>
    </div>
 </div>

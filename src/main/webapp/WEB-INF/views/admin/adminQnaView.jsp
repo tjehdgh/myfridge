@@ -5,14 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- 내가추가함 -->
-	<!-- table link -->
-	<link href = "/resources/css/qnatable.css" rel="stylesheet" />
+   <!-- table link -->
+   <link href = "/resources/css/qnatable.css" rel="stylesheet" />
     <!-- Favicon -->
     <link href="../resources/img/favicon.ico" rel="icon">
 
@@ -107,7 +108,7 @@ $(document).ready(function() {
    <div class="row" style="margin-right:0; margin-left:0;">
       <table class="table table-hover">
          <thead>
-            <tr class="table-active" style="background-color:orange;color:black">
+            <tr class="table-active" style="background-color:;color:black">
                <th scope="col" style="width:60%">
                   제목 : <c:out value="${qnaBoard.qnaTitle}" /><br/>
                   작성자 : <c:out value="${qnaBoard.userName}" />                            
@@ -125,16 +126,13 @@ $(document).ready(function() {
          </tbody>       
       </table>
    </div>
-   
+
    
 <c:if test="${qnaBoard.ansStatus eq '대기중'}">
-   <button type="button" id="btnReply" class="btn btn-secondary" style="background-color:orange;color:black">답변</button>
-   <button type="button" id="btnList" class="btn btn-secondary" style="background-color:gold;color:black">리스트</button>
+   <button type="button" id="btnReply" class="btn" style="background-color:;color:black"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"/></svg></button>
+   <button type="button" id="btnList" class="btn" ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#19070B}</style><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg></button>
 </c:if>
-<c:if test="${boardMe eq 'Y'}">   
-   <button type="button" id="btnUpdate" class="btn btn-secondary" style="background-color:green;color:black">수정</button>
-   <button type="button" id="btnDelete" class="btn btn-secondary" style="background-color:red;color:black">삭제</button>
-</c:if>   
+
    <br/>
    <br/>
 </div>
@@ -158,7 +156,7 @@ $(document).ready(function() {
 <div class="row" style="margin-right:0; margin-left:0;">
       <table class="table table-hover">
          <thead>
-            <tr class="table-active" style="background-color:orange;color:black">
+            <tr class="table-active" style="background-color:;color:black">
                <th scope="col" style="width:60%">
                   제목 : <c:out value="${qnaBoardAns.ansTitle}" /><br/>
               
@@ -184,8 +182,8 @@ $(document).ready(function() {
 </table>
 
 </div>
-<button type="button" id="btnList" class="btn btn-secondary" style="background-color:gold;color:black">리스트</button>
-<button type="button" id="btnUpdate1" class="btn btn-secondary" style="background-color:green;color:black">수정</button>
+<button type="button" id="btnList" class="btn" ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#19070B}</style><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg></button>
+<button type="button" id="btnUpdate1" class="btn" ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#66b913;height:20px;}</style><path d="M368.4 18.3L312.7 74.1 437.9 199.3l55.7-55.7c21.9-21.9 21.9-57.3 0-79.2L447.6 18.3c-21.9-21.9-57.3-21.9-79.2 0zM288 94.6l-9.2 2.8L134.7 140.6c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-3.8 11.3-1 23.9 7.3 32.4L164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L33.7 500.9c8.6 8.3 21.1 11.2 32.4 7.3l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 2.8-9.2L288 94.6z"/></svg></button>
 </div>
 </c:if>
                 
