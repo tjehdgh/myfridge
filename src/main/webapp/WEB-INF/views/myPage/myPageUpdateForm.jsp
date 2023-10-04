@@ -52,13 +52,13 @@
     
 
 
-<!-- 프로필 버튼 커스텀 css -->
+<!-- 프로필 버튼 커스텀 css #FF6600-->
 <style>
     .custom-file-upload {
         display: inline-block;
-        padding: 6px 12px;
+        padding: 8px 14px;
         cursor: pointer;
-        background-color: #FF6600; /* 주황색 배경색 */
+        background-color: #FF9999; /* 주황색 배경색 */
         color: white; /* 흰색 글자색 */
         border-radius: 4px;
     }
@@ -453,20 +453,25 @@
 				                            </div>
 				                            <form name="writeForm" id="writeForm" method="post" enctype="multipart/form-data">
 				                            
-				                        <!-- 프로필 사진 업로드 버튼 -->
+				                        
 				                
-                                            <label for="file">파일찾기</label>
+                                     <!--        <label for="file">파일찾기</label>
                                             <input type="file"  id="userFile" name="userFile" placeholder="프로필 사진을 선택하세요.">
                                             <button class="btn-primary" id="userfileSave" name="userfileSave" onclick="fn_userFile()"  style="color: white; width: 60px; height: 40px;">저장</button>
+                                       -->
                                        
+                                       
+                                       <!-- 프로필 사진 업로드 버튼 -->
+										<label for="userFile" class="custom-file-upload">
+										    파일 찾기
+										</label>
+										<input type="file" id="userFile" name="userFile" style="display: none;" />
+										&nbsp;&nbsp;
+                                       <button class="btn" id="userfileSave" name="userfileSave" onclick="fn_userFile()"  style="background-color: #FF6666; border-radius: 4px; color: white; width: 60px; height: 40px;">저장</button>
+                                       <!-- #89a5ea -->
                                         
                                         
-                                     <!--      <div class="filebox">
-										    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
-										    <label for="file">파일찾기</label> 
-										    <input type="file" id="file">
-										</div>
-                             			 -->             
+                                             
                                           
                                         <!-- 프로필 사진 업로드 버튼 -->
                                             
@@ -481,8 +486,7 @@
 				                          <!-- <h4 class="mb-0"><c:if test="userCookieId == userId">${user.userNickname}</c:if> 미키마우스</h4>
 				                            <h5><c:if test="userCookieId == userId">${EMAIL_CHECK.userEmail}</c:if>미키마우스@Disney.com</h5>    -->
 				                            
-				                            
-				                            <!-- if  여기서 user_info 테이블에 userEmail 없으니까 EMAIL_CHECK DAO에서 가지고 와야함??-->
+				                          
 				                        </div>
 				                    </div>
 		               		 </div>
