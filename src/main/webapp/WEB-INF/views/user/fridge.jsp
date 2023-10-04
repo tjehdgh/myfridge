@@ -557,7 +557,7 @@
 				   
 				   <c:forEach var = "i" begin = "${myRecipePaging.startPage}" end = "${myRecipePaging.endPage}"> <!-- for문 -->
 				      <c:choose>
-				         <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
+				         <c:when test="${i ne myRecipeCurPage}"> <!-- 현재 페이지가 아닐때 -->
 				         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_recipeList(${i})">${i}</a></li>
 				            </c:when>
 				            <c:otherwise>
