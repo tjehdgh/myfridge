@@ -348,30 +348,31 @@
 							</div>	
 						</div>
 						<!-- 가운데 정렬하기 위한 테두리 div 끝-->
-										  				    <nav>
-						      <ul class="pagination justify-content-center">
-						<c:if test = "${!empty irdntPaging}">
-						   <c:if test = "${irdntPaging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
-						         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_irdntList(${irdntPaging.prevBlockPage})">이전</a></li>
-						   </c:if>
-						   
-						   <c:forEach var = "i" begin = "${irdntPaging.startPage}" end = "${irdntPaging.endPage}"> <!-- for문 -->
-						      <c:choose>
-						         <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
-							         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_irdntList(${i})">${i}</a></li>
-							     </c:when>
-							     <c:otherwise>
-							         <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
-						         </c:otherwise>   
-						       </c:choose>
-						   </c:forEach>
-						   <c:if test = "${irdntPaging.nextBlockPage gt 0}"> <!-- gt 0보다 크냐 -->
-						         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_irdntList(${irdntPaging.nextBlockPage})">다음</a></li>
-						   </c:if>
-						</c:if>
-						      </ul>
-						   </nav> 
+						<nav>
+						  <ul class="pagination justify-content-center">
+							<c:if test = "${!empty irdntPaging}">
+							   <c:if test = "${irdntPaging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
+							         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_irdntList(${irdntPaging.prevBlockPage})">이전</a></li>
+							   </c:if>
+							   
+							   <c:forEach var = "i" begin = "${irdntPaging.startPage}" end = "${irdntPaging.endPage}"> <!-- for문 -->
+							      <c:choose>
+							         <c:when test="${i ne irdntCurPage}"> <!-- 현재 페이지가 아닐때 -->
+								         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_irdntList(${i})">${i}</a></li>
+								     </c:when>
+								     <c:otherwise>
+								         <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+							         </c:otherwise>   
+							       </c:choose>
+							   </c:forEach>
+							   <c:if test = "${irdntPaging.nextBlockPage gt 0}"> <!-- gt 0보다 크냐 -->
+							         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_irdntList(${irdntPaging.nextBlockPage})">다음</a></li>
+							   </c:if>
+							</c:if>
+						  </ul>
+						</nav> 
                         <!-- 본문 끝 -->
+
 				
 				</div> <!-- 흰색 배경 -->
 			  </div> <!-- 흰색배경 -->
@@ -414,7 +415,7 @@
 									   
 										   <c:forEach var = "i" begin = "${myFridgePaging.startPage}" end = "${myFridgePaging.endPage}"> <!-- for문 -->
 										      <c:choose>
-										         <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
+										         <c:when test="${i ne myFridgeCurPage}"> <!-- 현재 페이지가 아닐때 -->
 										         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_fridgeList(${i})">${i}</a></li>
 										            </c:when>
 										            <c:otherwise>
@@ -427,7 +428,8 @@
 										         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_fridgeList(${myFridgePaging.nextBlockPage})">다음</a></li>
 										   </c:if>
 									</c:if>
-								<button class="btn btn-primary" type="button" id="btnDelete">삭제</button>
+								<button class="" type="button" id="btnDelete" style="border: 1px solid gray; background-color: #FF6666; color: white; width: 60px; height: 37px;">삭제</button>
+								
 						      </ul>
 						   </nav> 
 		   
