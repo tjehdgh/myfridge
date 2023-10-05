@@ -291,11 +291,11 @@
 
              <div class="container-xxl py-1 bg-dark hero-header mb-5">
                 <div class="container text-center my-5 pt-1 pb-4">
-                    <h1 class="section-title ff-secondary text-center text-primary fw-normal">Recipe Searching</h1></br></br>
+                    <h1 class="section-title ff-secondary text-center text-primary fw-normal">My Fridge</h1></br></br>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="/index">홈</a></li>                          
-                            <li class="breadcrumb-item text-white active" aria-current="page">레시피랭킹</li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">나만의 냉장고</li>
                         </ol>
                     </nav>
                     
@@ -531,7 +531,7 @@
                      
                    
                      
-                         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Find Recipe</h5>
+                         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Possible Recipes</h5>
                          <h2 class="mb-5">현재 만들 수 있는 레시피</h2>
                      </div>     
                             
