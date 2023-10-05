@@ -17,7 +17,7 @@
                     
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>마포구 서교동 447-5 풍성빌딩 3층 C반, 서울특별시, 대한민국</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>마포구 서교동 447-5 풍성빌딩 3층 E반, 서울특별시, 대한민국</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@MyFridge.com</p>
                         <div class="d-flex pt-2">
@@ -49,7 +49,7 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="/index">냉장고를 부탁해</a>, All Right Reserved.
+                            &copy; <a class="border-bottom" href="/index">My Fridge</a>, All Right Reserved.
                      
                      <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                      Designed By <a class="border-bottom" href="/index">쌍용 영양실조</a><br><br>

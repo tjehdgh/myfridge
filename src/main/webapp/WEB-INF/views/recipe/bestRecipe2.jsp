@@ -7,7 +7,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
     <meta charset="UTF-8">
-    <title>냉장고를 부탁해</title>
+    <title>My Fridge</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">

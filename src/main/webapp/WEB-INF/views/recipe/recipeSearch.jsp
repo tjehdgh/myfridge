@@ -7,7 +7,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
     <meta charset="UTF-8">
-    <title>냉장고를 부탁해</title>
+    <title>My Fridge</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -105,7 +105,7 @@ function fn_enter()
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="/index">홈</a></li>                          
-                            <li class="breadcrumb-item text-white active" aria-current="page">레시피조회</li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">레시피 찾기</li>
                         </ol>
                     </nav>
                     
@@ -135,7 +135,7 @@ function fn_enter()
 						
 							<!-- 본문 내용 시작 -->		
 							<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">recipe menu</h5>
+			                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Recipe Searching</h5>
 			                    <h1 class="mb-5">레시피 찾기</h1>
 			                </div>
 			                
