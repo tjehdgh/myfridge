@@ -74,6 +74,17 @@ function fn_view(noticeSeq)
                 </div>
             </div>
         </div>            
+                
+                
+<!-- 흰색 바탕 레이아웃 -->
+<div class="col-12 text-center container">
+  <div class="col-12">
+    <div class="wow fadeInUp" data-wow-delay="0.1s">
+       <div class="team-item text-center rounded overflow-hidden">
+       <br>
+       <br>
+                
+                
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                     <ul class="nav  d-inline-flex justify-content-center border-bottom mb-1">
                         <li class="nav-item">
@@ -87,143 +98,158 @@ function fn_view(noticeSeq)
                         </li>
                       </ul>                    
                 </div>
-<div class="container" style="font-size: 18px">
-<table class="table table-hover">
-      <thead>
-      <tr style="background-color: #dee2e6;">
-         <th scope="col" class="text-center" style="width:10%">번호</th>
-         <th scope="col" class="text-center" style="width:55%">제목</th>
-         <th scope="col" class="text-center" style="width:10%">작성자</th>
-         <th scope="col" class="text-center" style="width:15%">등록일</th>
-         <th scope="col" class="text-center" style="width:10%">조회수</th>
-      </tr>
-      </thead>
-      <tbody>	
-      <tr>     
-         <td class = "cent">
-         <span>1</span>
-         </td>
-         <td class = "cent">         
-         <a href="javascript:void(0)" onclick="fn_view(${noticeBoard.noticeSeq})">이번 달 정기점검 및 업데이트</a>
-         </td>
-         <td class = "cent">
-         <span>관리자</span>
-         </td>
-         <td class = "cent">
-         <span>2023.09.06</span>
-         </td>
-         <td class = "cent">
-         <span>151</span>
-         </td>
-         </tr>
-         
-         <tr>
-         <td class = "cent">
-         <span>2</span>
-         </td>
-         <td class = "cent">         
-         <a href="javascript:void(0)" onclick="fn_view()">나만의 냉장고 오류 수정</a>
-         </td>
-         <td class = "cent">
-         <span>관리자</span>
-         </td>
-         <td class = "cent">
-         <span>2023.09.07</span>
-         </td>
-         <td class = "cent">
-         <span>221</span>
-         </td>
-         </tr>
-         
-         <tr>
-         <td class = "cent">
-         <span>3</span>
-         </td>
-         <td class = "cent">         
-         <a href="javascript:void(0)" onclick="fn_view()">레시피 오류 수정 및 추가</a>
-         </td>
-         <td class = "cent">
-         <span>관리자</span>
-         </td>
-         <td class = "cent">
-         <span>2023.09.08</span>
-         </td>
-         <td class = "cent">
-         <span>332</span>
-         </td>
-         </tr>
-         
-         <tr>
-         <td class = "cent">
-         <span>4</span>
-         </td>
-         <td class = "cent">         
-         <a href="javascript:void(0)" onclick="fn_view()">마이페이지 오류 수정 및 추가</a>
-         </td>
-         <td class = "cent">
-         <span>관리자</span>
-         </td>
-         <td class = "cent">
-         <span>2023.09.09</span>
-         </td>
-         <td class = "cent">
-         <span>422</span>
-         </td>
-         </tr>
-         
-         
-         <td class = "cent">
-         <span>5</span>
-         </td>
-         <td class = "cent">         
-         <a href="javascript:void(0)" onclick="fn_view()">레시피 랭킹 및 조회 오류 수정</a>
-         </td>
-         <td class = "cent">
-         <span>관리자</span>
-         </td>
-         <td class = "cent">
-         <span>2023.09.10</span>
-         </td>
-         <td class = "cent">
-         <span>512</span>
-         </td>                   	                                                   
-       <!--  <td class="text-center">${hiBoard.userName}</td> 
-       <td class="text-center">${hiBoard.regDate}</td> 
-       <td class="text-center"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${hiBoard.hiBbsReadCnt}" /></td>-->               
+<br>
+
+
       
-     
-     
-   </table>
- </div> 
-                
-   </tbody>
-   
-   
-   <!-- 페이징처리 -->
-    <nav>
-      <ul class="pagination justify-content-center">
-<c:if test = "${!empty paging}">
-   <c:if test = "${paging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
-         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전</a></li>
-   </c:if>
-   
-   <c:forEach var = "i" begin = "${paging.startPage}" end = "${paging.endPage}"> <!-- for문 -->
-      <c:choose>
-         <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
-         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
-            </c:when>
-            <c:otherwise>
-         <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
-            </c:otherwise>   
-        </c:choose>
-   </c:forEach>
-   <c:if test = "${paging.nextBlockPage gt 0}"> <!-- gt 0보다 크냐 -->
-         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음</a></li>
-   </c:if>
-</c:if>
-      </ul>
-   </nav> 
-         
+
+		<!-- 게시물 하드코딩 -->
+		<div class="container" style="font-size: 18px">
+		<table class="table table-hover">
+		      <thead>
+		      <tr style="background-color: #dee2e6;">
+		         <th scope="col" class="text-center" style="width:10%">번호</th>
+		         <th scope="col" class="text-center" style="width:55%">제목</th>
+		         <th scope="col" class="text-center" style="width:10%">작성자</th>
+		         <th scope="col" class="text-center" style="width:15%">등록일</th>
+		         <th scope="col" class="text-center" style="width:10%">조회수</th>
+		      </tr>
+		      </thead>
+		      <tbody>	
+		      <tr>     
+		         <td class = "cent">
+		         <span>1</span>
+		         </td>
+		         <td class = "cent">         
+		         <a href="javascript:void(0)" onclick="fn_view(${noticeBoard.noticeSeq})">이번 달 정기점검 및 업데이트</a>
+		         </td>
+		         <td class = "cent">
+		         <span>관리자</span>
+		         </td>
+		         <td class = "cent">
+		         <span>2023.09.06</span>
+		         </td>
+		         <td class = "cent">
+		         <span>151</span>
+		         </td>
+		         </tr>
+		         
+		         <tr>
+		         <td class = "cent">
+		         <span>2</span>
+		         </td>
+		         <td class = "cent">         
+		         <a href="javascript:void(0)" onclick="fn_view()">나만의 냉장고 오류 수정</a>
+		         </td>
+		         <td class = "cent">
+		         <span>관리자</span>
+		         </td>
+		         <td class = "cent">
+		         <span>2023.09.07</span>
+		         </td>
+		         <td class = "cent">
+		         <span>221</span>
+		         </td>
+		         </tr>
+		         
+		         <tr>
+		         <td class = "cent">
+		         <span>3</span>
+		         </td>
+		         <td class = "cent">         
+		         <a href="javascript:void(0)" onclick="fn_view()">레시피 오류 수정 및 추가</a>
+		         </td>
+		         <td class = "cent">
+		         <span>관리자</span>
+		         </td>
+		         <td class = "cent">
+		         <span>2023.09.08</span>
+		         </td>
+		         <td class = "cent">
+		         <span>332</span>
+		         </td>
+		         </tr>
+		         
+		         <tr>
+		         <td class = "cent">
+		         <span>4</span>
+		         </td>
+		         <td class = "cent">         
+		         <a href="javascript:void(0)" onclick="fn_view()">마이페이지 오류 수정 및 추가</a>
+		         </td>
+		         <td class = "cent">
+		         <span>관리자</span>
+		         </td>
+		         <td class = "cent">
+		         <span>2023.09.09</span>
+		         </td>
+		         <td class = "cent">
+		         <span>422</span>
+		         </td>
+		         </tr>
+		         
+		         
+		         <td class = "cent">
+		         <span>5</span>
+		         </td>
+		         <td class = "cent">         
+		         <a href="javascript:void(0)" onclick="fn_view()">레시피 랭킹 및 조회 오류 수정</a>
+		         </td>
+		         <td class = "cent">
+		         <span>관리자</span>
+		         </td>
+		         <td class = "cent">
+		         <span>2023.09.10</span>
+		         </td>
+		         <td class = "cent">
+		         <span>512</span>
+		         </td>                   	                                                   
+		       <!--  <td class="text-center">${hiBoard.userName}</td> 
+		       <td class="text-center">${hiBoard.regDate}</td> 
+		       <td class="text-center"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${hiBoard.hiBbsReadCnt}" /></td>-->               
+		      
+		     
+		     
+		   </table>
+		 </div> 
+		                
+		   </tbody>
+		   
+		   
+		   <!-- 페이징처리 -->
+			<nav>
+				      <ul class="pagination justify-content-center">
+				<c:if test = "${!empty paging}">
+				   <c:if test = "${paging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
+				         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전</a></li>
+				   </c:if>
+				   
+				   <c:forEach var = "i" begin = "${paging.startPage}" end = "${paging.endPage}"> <!-- for문 -->
+				      <c:choose>
+				         <c:when test="${i ne curPage}"> <!-- 현재 페이지가 아닐때 -->
+				         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+				            </c:when>
+				            <c:otherwise>
+				         <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+				            </c:otherwise>   
+				        </c:choose>
+				   </c:forEach>
+				   <c:if test = "${paging.nextBlockPage gt 0}"> <!-- gt 0보다 크냐 -->
+				         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음</a></li>
+				   </c:if>
+				</c:if>
+				      </ul>
+		   </nav> 
+<!-- 게시물 하드 코딩 끝 -->
+			<br>
+			<br>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 베경 레이아웃 닫는 div 끝 -->
+      
 <form name="bbsForm" id="bbsForm" method="post">
       <input type="hidden" name="noticeSeq" value="" />     
       <input type="hidden" name="curPage" value="${curPage}" />
