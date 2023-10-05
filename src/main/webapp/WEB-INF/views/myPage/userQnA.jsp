@@ -112,10 +112,11 @@ function fn_list(curPage)
 
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
                 <div class="container text-center my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">마이페이지</h1>
+                    <h1 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h1></br></br>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="/index"><a href="/index">홈</a></li>
+                            <li class=""><a href="/myPage/myPage">&nbsp;/ 마이페이지</a></li>
                             <li class="breadcrumb-item text-white active" aria-current="page">&nbsp;/ 나의 문의 내역</li>   <!-- &nbsp; 는 공백입니다 -->
                         </ol>
                     </nav>
@@ -149,23 +150,21 @@ function fn_list(curPage)
 		                        	<div class="sidebar">
 		                            <!-- 사이드바 내용 -->
 		                           	 <div class="card-header bg-primary text-white">마이페이지</div>
-					                    <div class="list-group list-group-flush">
-					                        <a href="/myPage/myPage" class="list-group-item list-group-item-action">내 기본 정보</a>
-					                        <a href="/myPage/myPageUpdateForm" class="list-group-item list-group-item-action">개인정보 수정</a>
-					                        <a href="/myPage/bookMark" class="list-group-item list-group-item-action">찜한 레시피</a>
-					                        <a href="/myPage/userQnA" class="list-group-item list-group-item-action">문의 내역</a>
-					                        <a href="/myPage/myRecipe" class="list-group-item list-group-item-action">나만의 레시피 내역</a> 
-					                        <a href="/user/dropOut" class="list-group-item list-group-item-action">회원 탈퇴</a>
-					                        
+					                   	<div class="list-group list-group-flush">
+					                       <a href="/myPage/myPage" class="list-group-item list-group-item-action">내 기본 정보</a>
+					                       <a href="/myPage/myPageUpdateForm" class="list-group-item list-group-item-action">회원정보 수정</a>
+					                       <a href="/myPage/bookMark" class="list-group-item list-group-item-action">찜한 레시피</a>
+					                       <a href="/myPage/userQnA" class="list-group-item list-group-item-action">문의내역</a>
+					                       <a href="/myPage/myRecipe" class="list-group-item list-group-item-action">나만의 레시피 내역</a> 
+					                       <a href="/user/dropOut" class="list-group-item list-group-item-action">회원 탈퇴</a>
+					                       
 					                        <div class="card-header bg-primary text-white">고객 센터</div>
 							                    <div class="list-group list-group-flush">
 							                        <a href="/board/qna" class="list-group-item list-group-item-action">QnA</a>
 							                        <a href="/board/notice" class="list-group-item list-group-item-action">공지사항</a>
 							                        <a href="/admin/event" class="list-group-item list-group-item-action">이벤트</a> <!-- 이벤트는 공지사항이랑 같이 쓰이니까 같은 컨트롤러 사용 -->
 							                   </div>
-							                 
-					                        
-					                     </div>
+							               </div>
 		                    </aside>
 		                    <!-- 사이드바 끝 -->
 		

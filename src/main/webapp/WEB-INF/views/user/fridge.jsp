@@ -6,12 +6,39 @@
 <html>
  <%@ include file="/WEB-INF/views/include/head.jsp" %>
 
+
+<!-- 삭제 버튼 위치 조정위한 css -->
+<style>
+
+	.list-group-item {
+	    margin-bottom: 0; /* 리스트 아이템 아래쪽 마진을 0으로 설정하여 공간을 없앰 */
+	}
+	
+	.page-item {
+	    margin-right: 0.2rem; /* 페이징 아이템 간의 오른쪽 마진을 설정하여 약간의 간격을 주도록 함 */
+	}
+	
+	#btnDelete {
+	    margin-left: 0.2rem; /* 삭제 버튼의 왼쪽 마진을 설정하여 약간의 간격을 주도록 함 */
+	}
+
+
+</style>
+
+
  <script> 
 	
 	var chkVal = "";
 	var numberCheck = /^[0-9]+$/; 
     $(document).ready(function() {
 		 
+    	
+    	//재료 한눈에 보기 버튼
+    	$("#_btnMyIrdnt").on("click", function() {
+    		
+    		location.href = "/user/myIrdnt";
+    	});
+    	
 
     	$("#btnFridgeSearch").on("click", function() {	
     	
@@ -382,7 +409,8 @@
     
     
     <!-- 사이드바 -->
-                                        
+      
+                                      
       <!-- 사이드바 시작 -->
     <aside class="col-lg-3 order-first order-lg-last">
         <div class="sidebar">
@@ -399,15 +427,19 @@
 										  <input type="checkbox" id="horns" name="horns" value="${MyFridge.irdntName}"/>
 										 재료이름:${MyFridge.irdntName}&nbsp;<div></div> 수량: ${MyFridge.fridgeIrdntAmount}g<div></div>
 										 <input type = "text" 
-										 id="fridgeIrdntAmountUpdate<c:out value='${cnt}' />" name ="fridgeIrdntAmountUpdate<c:out value='${cnt}' />" value = "${MyFridge.fridgeIrdntAmount}">g  
-										 <button onclick="fn_update('${MyFridge.irdntName}', document.getElementById('fridgeIrdntAmountUpdate<c:out value='${cnt}' />').value)"	>수정</button>
+										 id="fridgeIrdntAmountUpdate<c:out value='${cnt}' />" name ="fridgeIrdntAmountUpdate<c:out value='${cnt}' />" value = "${MyFridge.fridgeIrdntAmount}" style="width: 120px;"> g  
+										 &nbsp;&nbsp;&nbsp;&nbsp;<button onclick="fn_update('${MyFridge.irdntName}', document.getElementById('fridgeIrdntAmountUpdate<c:out value='${cnt}' />').value)"	>수정</button>
 										 <div></div> 
 										  </a>
 										
 								   	</c:forEach>
 								   
-								   				    <nav>
-								<ul class="pagination justify-content-center">
+								   
+								  							   
+								   
+						 <div style="display: flex; justify-content: space-between; align-items: center;">		   
+							<nav>
+								<ul class="pagination"> <!-- 오른쪽 정렬 : justify-content-end,  왼쪽 정렬 : justify-content-start , 가운데 정렬 : justify-content-center -->
 									<c:if test = "${!empty myFridgePaging}">
 									 	  <c:if test = "${myFridgePaging.prevBlockPage gt 0}">  <!-- gt - 0보다 크냐,> -->
 									         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_fridgeList(${myFridgePaging.prevBlockPage})">이전</a></li>
@@ -428,28 +460,45 @@
 										         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_fridgeList(${myFridgePaging.nextBlockPage})">다음</a></li>
 										   </c:if>
 									</c:if>
-								<button class="" type="button" id="btnDelete" style="border: 1px solid gray; background-color: #FF6666; color: white; width: 60px; height: 37px;">삭제</button>
+									
 								
 						      </ul>
 						   </nav> 
-		   
-				   <div class="input-group-append">
-				   </div>
-   			</c:if>
-
-
-			<input id ="_myFridgeSearch" name="_myFridgeSearch" type="text" class="form-control" 
-			placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="basic-addon2"
-			value = "${myFridgeSearchValue}">
-             <div class="input-group-append">
-               <button class="btn btn-primary" type="button" id="btnFridgeSearch">냉장고 검색</button>
-             </div>          
-                   
-              </div>
-       </div>
-     
-     </div>
- </aside>
+						   
+						   <button type="button" id="btnDelete" style="border: 1px solid gray; background-color: #FF6666; color: white; width: 60px; height: 37px;">삭제</button>
+						 </div>
+						   
+						   
+					   <div class="input-group-append">
+					   </div>
+	   			</c:if>
+	
+				
+				<br>
+				<div style="display: flex; align-items: center;">
+	            <!--  <div class="input-group-append"> -->
+	             	<input id ="_myFridgeSearch" name="_myFridgeSearch" type="text" class="form-control" 
+						placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="basic-addon2"
+						value = "${myFridgeSearchValue}"  style="width:150px" >
+				
+	               <button class="btn btn-primary" type="button" id="btnFridgeSearch">냉장고 검색</button>
+	             </div> 
+	             </div> 
+	             
+	             
+			
+			<!--  내 냉장고 재료 한눈에 보기버튼 시작 -->
+			<br>
+			<button id="_btnMyIrdnt" style="float: left; border: 1px solid gray; background-color: #6699FF; color: white; border-radius: 4px;"><i class="fas fa-search-plus"></i> 재료 한눈에 보기</button>
+			<br>
+			<!--  내 냉장고 재료 한눈에 보기버튼 끝 -->
+	             
+	                   
+	              </div>
+	       </div>
+	     
+	     </div>
+	 </aside>
     <!-- 사이드바 끝 -->
 </div>
 
@@ -465,6 +514,8 @@
        
 <!-- 흰색 배경 테두리 시작 -->
 <div>
+ <div class="col-12 text-center container">
+  <div class="col-12">
     <div class="wow fadeInUp" data-wow-delay="0.1s">
        <div class="team-item text-center rounded overflow-hidden">
        
@@ -478,6 +529,7 @@
                      <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정가능. -->
 					<div class="content section_delete"  >
                      
+                   
                      
                          <h5 class="section-title ff-secondary text-center text-primary fw-normal">Find Recipe</h5>
                          <h2 class="mb-5">현재 만들 수 있는 레시피</h2>
@@ -579,7 +631,12 @@
 
 </div>
 </div>
+</div>
+</div>
 <!-- 흰색 배경 끝 -->
+
+</div>
+</div>
         <!-- 레시피 --> 
 
 

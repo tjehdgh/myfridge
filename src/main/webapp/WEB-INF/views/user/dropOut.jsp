@@ -191,8 +191,9 @@
                     <h1 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h1></br></br>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="/myPage/myPage">My Page</a></li>                          
-                            <li class="breadcrumb-item text-white active" aria-current="page">Sign Drop</li>
+                        <li class="/index"><a href="/index">홈</a></li>
+                            <li class=""><a href="/myPage/myPage">&nbsp;/ 마이페이지</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">&nbsp;/ 회원 탈퇴</li>
                         </ol>
                     </nav>
                     
