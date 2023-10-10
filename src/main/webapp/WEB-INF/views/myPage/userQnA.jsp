@@ -74,7 +74,7 @@ $(document).ready(function() {
 	
    
    $("#btnSearch").on("click", function() {
-      //document.myQnaSearchForm.myQnaSeq.value = ""; 
+      document.myQnaSearchForm.myQnaSeq.value = $("#myQnaSeq").val(); 
       document.myQnaSearchForm.searchValue.value = $("#_searchValue").val();
       document.myQnaSearchForm.orderByRegDate.value = $("#orderByRegDate").val();
       document.myQnaSearchForm.curPage.value = "1";
@@ -87,14 +87,24 @@ $(document).ready(function() {
 });
 
 
+//문의 내역 제목 누르면 문의내역 게시물페이지로 이동
+function fn_view(qnaSeq)
+{
+	document.myQnaSearchForm.qnaSeq.value = qnaSeq;  
+	document.myQnaSearchForm.action = "/board/qnaView";
+	document.myQnaSearchForm.submit();
+}
+
+
 function fn_list(curPage)
 {
-	//document.myQnaSearchForm.myQnaSeq.value = "";
+	document.myQnaSearchForm.qnaSeq.value = "";
 	document.myQnaSearchForm.curPage.value = curPage;
 	document.myQnaSearchForm.action = "/myPage/userQnA";
 	document.myQnaSearchForm.submit();
 	
 }
+
 
 </script>
 
@@ -252,7 +262,10 @@ function fn_list(curPage)
 											         <th scope="col" class="text-center" style="width:10%">답변 여부</th>
 											      </tr>
 											      </thead>
+											      
 		
+													
+													
 													
 													<c:if test="${!empty myQnaList}">   
 														<tbody>
@@ -260,13 +273,13 @@ function fn_list(curPage)
 														      <tr>
 														      <c:choose>
 														      	<c:when test="${myList.qnaIndent eq 0}"> <!-- 답글은 indent가 0이면 게시물 번호 보여주기 -> 게시물 번호가 있다는 것은 부모글이기때문 -->
-														         <td class="text-center">${myList.qnaSeq}</td>
+														         <td class="text-center" name="qnaSeq" id="qnaSeq">${myList.qnaSeq}</td>
 																</c:when>
 																<c:otherwise>
 																<td class="text-center"></td>	<!-- 부모글 아니면(답글) 들여쓰기가 있음-> 시퀀스(게시글 번호)없애기 번호대신 이미지 넣어줄거임 -->
 																</c:otherwise>
 															</c:choose>	
-																<td scope="col" class="font-size: 14px;">${myList.qnaTitle}</td>
+																<td scope="col" class="font-size: 14px;"><a href="javascript:void(0)" onclick="fn_view(${myList.qnaSeq})">${myList.qnaTitle}</a></td>  <!-- 현재 게시물의 대한 번호를 가지고감 -->
 													            <td scope="col">${myList.regDate}</td>	
 													            <td scope="col">${myList.ansStatus}</td>			
 														     </tr>
@@ -331,10 +344,11 @@ function fn_list(curPage)
 
 
 <form name="myQnaSearchForm" id="myQnaSearchForm" method="post">
-     <!-- <input type="hidden" name="myQnaSeq" value="${myQnaSearch.qnaSeq}" />   -->
-      <input type="hidden" name="searchValue" value="${searchValue}" />
+      <input type="hidden" name="qnaSeq" value="${qnaSeq}" />   
+      <input type="hidden" name="_searchValue" value="${searchValue}" />
       <input type="hidden" name="orderByRegDate" value="${orderByRegDate}" />
       <input type="hidden" name="curPage" value="${curPage}" />
+    <!--  <input type="hidden" name="userId" value="${userId}" /> --> 
    </form>
 
         
