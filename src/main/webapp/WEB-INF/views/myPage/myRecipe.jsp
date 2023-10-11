@@ -67,7 +67,7 @@ $(document).ready(function() {
       document.myRecipeSearchForm.searchType.value = $("#_searchType").val();
       document.myRecipeSearchForm.searchValue.value = $("#_searchValue").val();
       document.myRecipeSearchForm.curPage.value = "1";
-      document.myRecipeSearchForm.action = "/myPage/bookMark";
+      document.myRecipeSearchForm.action = "/myPage/myRecipe";
       document.myRecipeSearchForm.submit();
    });
 
@@ -232,7 +232,7 @@ function fn_view(recipeCode)
 						                        <!-- 검색 상자1 레시피 제목 -->
 												<div class="container mt-4"v style="display: flex; justify-content: center;">
 												    <div class="input-group mb-3" style="width: 500px;">
-												        <input type="text" name="_searchType" id="_searchType" value="${searchType}" class="form-control" placeholder="제목" aria-label="검색어 입력" aria-describedby="basic-addon2" >
+												        <input type="text" name="_searchType" id="_searchType" value="${searchType}" class="form-control" placeholder="레시피 이름" aria-label="검색어 입력" aria-describedby="basic-addon2" >
 												        <div class="input-group-append">
 												        <button class="btn-primary" type="button" id="btnSearchType" style="color: white; width: 60px; height: 40px;" >검색</button>
 												        </div>
@@ -246,7 +246,7 @@ function fn_view(recipeCode)
 												    <div class="input-group mb-3"  style="width: 500px;">
 												        <input type="text" style="width: 150px;" name="_searchValue" id="_searchValue" value="${searchValue}" class="form-control" placeholder="레시피 설명" aria-label="검색어 입력" aria-describedby="basic-addon2">
 												        <div class="input-group-append">
-														<button class="btn-primary" type="button" id="btnSearchType" style="color: white; width: 60px; height: 40px;" >검색</button>
+														<button class="btn-primary" type="button" id="btnSearchValue" style="color: white; width: 60px; height: 40px;" >검색</button>
 												        </div>
 												    </div>
 												</div>

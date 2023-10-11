@@ -520,7 +520,7 @@ SELECT  RECIPE_CODE,
            </if>
            
            <if test='recipeIntro != null and recipeIntro != ""'>
-                    AND DBMS_LOB.INSTR(RECIPE_INTRO, #{recipeIntro}) > 0 )
+                    AND DBMS_LOB.INSTR(RECIPE_INTRO, #{recipeIntro}) > 0 
            </if>
                    ORDER BY REG_DATE DESC))
  WHERE RNUM <![CDATA[>=]]> #{startRow}	
@@ -534,11 +534,11 @@ SELECT COUNT(RECIPE_CODE) AS TOTAL_COUNT
     FROM RECIPE_INFO
     WHERE USER_ID = #{userId}
 <if test='recipeName != null and recipeName != ""'>
-         AND A.RECIPE_NAME LIKE '%' || #{recipeName} || '%'
+         AND RECIPE_NAME LIKE '%' || #{recipeName} || '%'
 </if>
 
 <if test='recipeIntro != null and recipeIntro != ""'>
-         AND DBMS_LOB.INSTR(A.RECIPE_INTRO, #{recipeIntro}) > 0
+         AND DBMS_LOB.INSTR(RECIPE_INTRO, #{recipeIntro}) > 0
 </if>
 </select>
 
