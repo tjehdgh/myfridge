@@ -74,7 +74,7 @@ $(document).ready(function() {
 	
    
    $("#btnSearch").on("click", function() {
-      document.myQnaSearchForm.myQnaSeq.value = $("#myQnaSeq").val(); 
+      document.myQnaSearchForm.qnaSeq.value = "";       
       document.myQnaSearchForm.searchValue.value = $("#_searchValue").val();
       document.myQnaSearchForm.orderByRegDate.value = $("#orderByRegDate").val();
       document.myQnaSearchForm.curPage.value = "1";
@@ -239,7 +239,7 @@ function fn_list(curPage)
 												            <option value="ASC" <c:if test='${myQnaSearch.orderByRegDate eq "ASC"}'>selected</c:if>>오래된순</option>
 												         </select>
 												        <div class="input-group-append">
-														<button type="button" class="btn-primary" id="btnDropOut"  style="color: white; width: 60px; height: 40px;">검색</button>
+														<button type="button" class="btn-primary" id="btnSearch" name="btnSearch" style="color: white; width: 60px; height: 40px;">검색</button>
 													    </div>
 												    </div>
 												</div>
@@ -345,7 +345,7 @@ function fn_list(curPage)
 
 <form name="myQnaSearchForm" id="myQnaSearchForm" method="post">
       <input type="hidden" name="qnaSeq" value="${qnaSeq}" />   
-      <input type="hidden" name="_searchValue" value="${searchValue}" />
+      <input type="hidden" name="searchValue" value="${searchValue}" />
       <input type="hidden" name="orderByRegDate" value="${orderByRegDate}" />
       <input type="hidden" name="curPage" value="${curPage}" />
     <!--  <input type="hidden" name="userId" value="${userId}" /> --> 
