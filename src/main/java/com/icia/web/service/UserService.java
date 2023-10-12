@@ -117,4 +117,22 @@ public class UserService
    }
    
    
+   
+   //회원탈퇴 완료 후 회원정보 가져옴
+   public User userDropOutSelect(String userId)
+   {
+      User user = null;
+      
+      try
+      {
+         user = userDao.userDropOutSelect(userId);
+      }
+      catch(Exception e)
+      {
+         logger.error("[UserService] userDropOutSelect Exception", e);
+      }
+      
+      return user;
+   }
+   
 }

@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>회원 탈퇴 완료</title>
+<title>MY Fridge</title>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" type="text/css">
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -26,7 +26,7 @@
 
 
     <!-- Favicon -->
-    <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9yvSwTMv-e__WFBRb2kj8lNsAX7PTGCR88w&usqp=CAU" rel="icon">
+    <link href="resources/img/fridgeFavicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,7 +98,7 @@ $(document).ready(function() {
                         
                 
                     </div>          
-                      <a href="/login" class="btn btn-primary py-2 px-4">로그인</a>                      
+                      <a href="/user/login" class="btn btn-primary py-2 px-4">로그인</a>                      
                 </div>
             </nav>
 
@@ -124,10 +124,7 @@ $(document).ready(function() {
             <div class="container">
           
  
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h5>
-                    <h1 class="mb-5">회원 탈퇴 완료</h1>
-                </div>
+               
                 
 	             <!-- 본문 내용 시작 -->
 				 <div class="container-xxl">
@@ -136,11 +133,22 @@ $(document).ready(function() {
 	             		 <div>
 		                    <div class="col-lg-12 col-md-13 wow fadeInUp" data-wow-delay="0.1s"> 
 		                        <div class="team-item text-center rounded overflow-hidden" d-flex justify-content-center>
-		                            
+		                        
+		                        
 	                           	<!-- 회원 탈퇴 본문 내용들을 가장큰 본문 흰테두리 안세서 옆에 여백을 줘서 깔끔하게 보이기 위한 더 작은 영역 시작-->
 			                       <div class="col-12 wow fadeInUp justify-content-center" data-wow-delay="0.1s">
 									    <div class="team-item text-center overflow-hidden">
 									    	
+									    	<!-- 회원탈퇴 완료 제목 -->
+									    	<br>
+									    	<br>
+									    	<br>
+					                         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+							                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h5>
+							                    <h1 class="mb-5">회원 탈퇴 완료</h1>
+							                </div>
+					                        <!-- 회원탈퇴 완료 제목 -->
+		                        
 								
 										        <!-- 탈퇴안내 경고 영역 시작 -->
 										        <div class="col-lg-9 col-md-10 col-sm-11 col-12 mx-auto"> <!-- 여기서 col-12는 필요에 따라 조정할 수 있습니다. -->
@@ -148,7 +156,7 @@ $(document).ready(function() {
 											             <br>
 											             <br><!-- 흰색배경 맨 위와 본문내용 간의 공간위한 br -->
 											             
-											             <h6 style="text-align: left;"> <span style="color: orange; font-size: 19px; ">✔&nbsp</span>회원탈퇴 신청이 완료되었습니다.</h6>
+											             <h5 style="text-align: left;"> <span style="color: orange; font-size: 19px; ">✔&nbsp</span>회원탈퇴 신청이 완료되었습니다.</h5>
 											             <br>
 											             <p style="text-align: left; font-size: 14px;">안녕하세요. My fridge입니다.
 											             <br>
@@ -174,13 +182,17 @@ $(document).ready(function() {
 																      <td style="border: 1px solid gray; text-align:left; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;">: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${user.userNickname}  </td>
 																    </tr>
 																    <tr>
+																      <td style="border: 1px solid gray; width: 130px; text-align: left; font-size: 14px; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;">사용자 이메일</td>
+																      <td style="border: 1px solid gray; text-align:left; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;">: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${user.email}  </td>
+																    </tr>
+																 <!--   <tr>
 																      <td style="border: 1px solid gray; width: 130px; text-align: left; font-size: 14px; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;">사용자 주소</td>
 																      <td style="border: 1px solid gray; text-align:left; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;;">: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${user.userAddress}</td>
 																    </tr>
 																    <tr>
 																      <td style="border: 1px solid gray; width: 130px; font-size: 14px; text-align: left; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;">사용자 계좌번호</td>
 																      <td style="border: 1px solid gray; text-align:left; border-right: hidden; border-top: hidden; border-left: hidden; border-bottom: hidden;">: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${user.userAccount} </td>
-																    </tr>
+																    </tr> --> 
 																  </tbody>
 																</table>
 														</div>

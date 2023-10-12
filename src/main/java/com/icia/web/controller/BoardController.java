@@ -156,6 +156,11 @@ public class BoardController
 			QnaBoard qnaBoard = null;
 			QnaBoardAns qnaBoardAns = null;
 			
+			logger.debug("넘어왔니????++++++");
+			logger.debug("qnaSeq 넘어왔니 : " + qnaSeq);
+			logger.debug("넘어왔니????++++++");
+			
+			
 			//상세페이지 조회
 			if(qnaSeq > 0)
 			{
@@ -172,6 +177,8 @@ public class BoardController
 					boardMe = "Y";
 				}
 			}
+			
+		
 			
 			model.addAttribute("boardMe", boardMe);
 			model.addAttribute("qnaSeq", qnaSeq);

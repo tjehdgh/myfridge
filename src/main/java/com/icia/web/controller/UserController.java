@@ -391,9 +391,9 @@ public class UserController
 		{
 				String userId = HttpUtil.get(request, "userId");
 				
-				User user = userService.userSelect(userId); //userId로 쿼리에서 정보 다 가져옴
+				User user = userService.userDropOutSelect(userId); //userId로 쿼리에서 정보 다 가져옴
 				
-				model.addAttribute("user", user) ; 
+				model.addAttribute("user", user); 
 			
 			return "/user/dropoutSuccess";
 		}

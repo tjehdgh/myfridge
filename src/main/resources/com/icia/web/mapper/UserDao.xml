@@ -104,5 +104,27 @@ UPDATE USER_INFO
     WHERE USER_ID = #{userId}
 </update>
 
+<!-- 회원탈퇴 완료 페이지에서 정보조회 -->
+ <select id="userDropOutSelect" parameterType="String" resultMap="userResultMap">     
+   SELECT USER_ID,
+          NVL(USER_PWD, '') AS USER_PWD,
+          NVL(USER_EMAIL, '') AS USER_EMAIL,
+          NVL(USER_ADDRESS, '') AS USER_ADDRESS,
+          NVL(USER_AGE, 0) AS USER_AGE,
+          NVL(USER_GENDER, '') AS USER_GENDER,
+          NVL(USER_PHONE_NUMBER, '') AS USER_PHONE_NUMBER,
+          NVL(STATUS, 'N') AS STATUS,
+          NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+          NVL(USER_ACCOUNT, '') AS USER_ACCOUNT,
+          NVL(USER_NAME, '') AS USER_NAME,
+          NVL(USER_NICKNAME, '') AS USER_NICKNAME,
+          NVL(FILE_EXT, '') AS FILE_EXT
+     FROM USER_INFO
+    WHERE USER_ID = #{value}
+    AND STATUS = 'N'
+  </select>
+  
+
+
 
 </mapper>

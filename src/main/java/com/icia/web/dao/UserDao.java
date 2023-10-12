@@ -31,6 +31,9 @@ public interface UserDao
 	
 	//회원프로파일 정보 변경
 	public int userdFileUpdate(User user);
+	
+	//회원탈퇴 후 사용자 정보 조회
+	public User userDropOutSelect(String userId);
 }
 
 	

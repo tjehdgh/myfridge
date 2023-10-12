@@ -479,7 +479,7 @@
 						                            <div class="form-group">
 						                            <br>
 						                                <h6 align="left">이메일 주소</h6>
-						                                <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="이메일 주소" readonly>
+						                                <input type="text" class="form-control" id="userEmail" name="userEmail" value="${user.email}" placeholder="이메일 주소" readonly>
 						                            </div>
 												 </div>
 											  </div>
