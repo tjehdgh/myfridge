@@ -24,4 +24,3 @@
 ---|---|
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/3045d3bb-ea0c-4326-af6c-1faafb7a2a25)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/506a60ef-2f27-4f50-b2a8-518ec26bce1b)
 ---|---|
----
