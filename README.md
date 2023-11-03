@@ -20,7 +20,7 @@
 * AWS
 
 # API
-![image](https://github.com/tjehdgh/myfridge/assets/146055280/7b17ecd4-0b28-4d36-bb14-5f861e6a93ce) | ![image](https://github.com/tjehdgh/myfridge/assets/146055280/0442a9be-636a-4804-9da8-5b902333b23d)
+![image](https://github.com/tjehdgh/myfridge/assets/146055280/7b17ecd4-0b28-4d36-bb14-5f861e6a93ce) | ![image](https://github.com/tjehdgh/myfridge/assets/146055280/0442a9be-636a-4804-9da8-5b902333b23d) |
 
 
 ---
