@@ -18,4 +18,6 @@
 * RDBMS ORACLE
 * BootStrap 4<br>
 * AWS
-
+---
+#ERD
+![image](https://github.com/tjehdgh/myfridge/assets/146055280/3045d3bb-ea0c-4326-af6c-1faafb7a2a25)
