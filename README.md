@@ -27,7 +27,6 @@
 # API/ERD
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/7b17ecd4-0b28-4d36-bb14-5f861e6a93ce)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/0442a9be-636a-4804-9da8-5b902333b23d) 
 ---|---|
-* 
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/3045d3bb-ea0c-4326-af6c-1faafb7a2a25)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/506a60ef-2f27-4f50-b2a8-518ec26bce1b)
 ---
 # 로그인/회원가입
@@ -36,5 +35,7 @@
 # 레시피랭킹/조회
 ![rank](https://github.com/tjehdgh/myfridge/assets/146055280/8788bb70-9876-48aa-b27b-117b8d389b7b)|![search](https://github.com/tjehdgh/myfridge/assets/146055280/dad7094c-08a6-44b5-af12-0b1f9c8ceaf6)
 ---|---|
+- [x] 레시피 랭킹페이지에선 레시피들을 리스트로담아 추천수/조회수 순으로 나열.
+- [x] 레시피 조회에선 한식,중식,일식,퓨전,동남아시아 별로 데이터들을 담아서 조회.
 ---
 # 레시피등록
