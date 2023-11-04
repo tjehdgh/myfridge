@@ -10,7 +10,7 @@
 레시피를 찾아주는 저희 'My fridge' 프로젝트를 기획하게 되었습니다.
 * **[회원관리](#로그인/회원가입)**
 * **[레시피 랭킹/조회](#레시피랭킹/조회)**
-* **[레시피 등록](#레시피 상세페이지)**
+* **[레시피 기본정보](#레시피 상세페이지)**
 * **[커뮤니티](#Q&A게시판)**
 * **[부가기능](#etc)** 
 ---
@@ -24,19 +24,23 @@
 * BootStrap 4<br>
 * AWS
 
+---
 # API/ERD
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/7b17ecd4-0b28-4d36-bb14-5f861e6a93ce)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/0442a9be-636a-4804-9da8-5b902333b23d) 
 ---|---|
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/3045d3bb-ea0c-4326-af6c-1faafb7a2a25)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/506a60ef-2f27-4f50-b2a8-518ec26bce1b)
+
 ---
 # 로그인/회원가입
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/cebcfa45-3335-42e0-a639-6defbc3e8dea)
+
 ---
 # 레시피랭킹/조회
 ![rank](https://github.com/tjehdgh/myfridge/assets/146055280/8788bb70-9876-48aa-b27b-117b8d389b7b)|![search](https://github.com/tjehdgh/myfridge/assets/146055280/dad7094c-08a6-44b5-af12-0b1f9c8ceaf6)
 ---|---|
 - [x] 레시피 랭킹페이지에선 레시피들을 리스트로담아 추천수/조회수 순으로 리스트 나열.
 - [x] 레시피 조회에선 한식,중식,일식,퓨전,동남아시아 별로 검색기능.
+      
 ---
 # 레시피 상세페이지
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/6a3bf2c1-3583-4106-a4de-1d7ecb712506)<br>
@@ -44,3 +48,12 @@
 - [x] 레시피의 들어갈 주재료/부재료.
 - [x] 레시피 조리과정.
 - [x] 레시피 댓글 기능.
+
+---
+# 커뮤니티
+![image](https://github.com/tjehdgh/myfridge/assets/146055280/8737c21d-8e77-4873-ab3a-fcee0b656339)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/48ed36df-38d6-4e5b-a74d-e23509245545)
+---|---|
+- [x] Q&A게시판에서 게시글 글쓰기/수정하기/삭제 기능.
+- [x] Q&A게시판에서 관리자가 답변 기능.
+- [x] 공지사항 관리자가 글쓰기 기능.
+ 
