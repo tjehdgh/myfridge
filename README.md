@@ -30,7 +30,7 @@
 ![image](https://github.com/tjehdgh/myfridge/assets/146055280/3045d3bb-ea0c-4326-af6c-1faafb7a2a25)|![image](https://github.com/tjehdgh/myfridge/assets/146055280/506a60ef-2f27-4f50-b2a8-518ec26bce1b)
 ---
 # 로그인/회원가입
-
+![image](https://github.com/tjehdgh/myfridge/assets/146055280/cebcfa45-3335-42e0-a639-6defbc3e8dea)
 ---
 # 레시피랭킹/조회
 ![rank](https://github.com/tjehdgh/myfridge/assets/146055280/8788bb70-9876-48aa-b27b-117b8d389b7b)|![search](https://github.com/tjehdgh/myfridge/assets/146055280/dad7094c-08a6-44b5-af12-0b1f9c8ceaf6)
