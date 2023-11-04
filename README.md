@@ -1,6 +1,6 @@
 # My Fridge
 ---
-![제목 없는 동영상 - Clipchamp로 제작](https://github.com/tjehdgh/myfridge/assets/146055280/47b947bf-b6dc-41de-8695-24c356d28d40)<br>
+![main](https://github.com/tjehdgh/myfridge/assets/146055280/980864b6-5b07-46eb-9659-aafbbf16d81d)<br>
 * 다들 어떠헌 요리를 한 이후에 남는 
 재료들로 인해 곤란했던 경험이 있었을 것입니다.
 이로 인해 지금 가지고 있는 재료로 
