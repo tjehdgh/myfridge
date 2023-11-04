@@ -1,6 +1,7 @@
 # My Fridge
 ---
-![main](https://github.com/tjehdgh/myfridge/assets/146055280/980864b6-5b07-46eb-9659-aafbbf16d81d)<br>
+![main](https://github.com/tjehdgh/myfridge/assets/146055280/c215bc61-fd05-4447-9b8e-309c9b8410e0)
+<br>
 * 다들 어떠헌 요리를 한 이후에 남는 
 재료들로 인해 곤란했던 경험이 있었을 것입니다.
 이로 인해 지금 가지고 있는 재료로 
